@@ -6905,18 +6905,29 @@
 
 **Query #1**
 
-    CREATE TABLE customer_cohorts AS
-    SELECT account_id,
-    MIN(payment_date) AS first_payment,
-    DATE_FORMAT(MIN(payment_date),'%Y-%m') AS cohort
+    CREATE TABLE transactions AS
+    SELECT *
     FROM transaction_data
-    GROUP BY account_id;
+    WHERE payment_usd > 1;
 
 There are no results to be displayed.
 
 ---
 
 **Query #2**
+
+    CREATE TABLE customer_cohorts AS
+    SELECT account_id,
+    MIN(payment_date) AS first_payment,
+    DATE_FORMAT(MIN(payment_date),'%Y-%m') AS cohort
+    FROM transactions
+    GROUP BY account_id;
+
+There are no results to be displayed.
+
+---
+
+**Query #3**
 
     SELECT *
     FROM customer_cohorts;
@@ -7006,7 +7017,6 @@ There are no results to be displayed.
 | 4kQ5GR1W04QtQAB | 2020-11-02 00:00:00 | 2020-11 |
 | 4oQ5GR1cj4QtQAA | 2021-01-11 00:00:00 | 2021-01 |
 | 4pQ5GR1KH4QtQAH | 2020-07-14 00:00:00 | 2020-07 |
-| 4pQ5GR1R44QtQAF | 2020-09-19 00:00:00 | 2020-09 |
 | 4rQ5GR11h4QtQAE | 2020-10-06 00:00:00 | 2020-10 |
 | 4UQ5GR1Ke4QtQAR | 2020-05-05 00:00:00 | 2020-05 |
 | 4wQ5GR19b4QtQAE | 2020-05-27 00:00:00 | 2020-05 |
@@ -7066,7 +7076,6 @@ There are no results to be displayed.
 | 8HQ5GR0t34QtQAQ | 2020-03-23 00:00:00 | 2020-03 |
 | 8hQ5GR1K74QtQAF | 2020-08-25 00:00:00 | 2020-08 |
 | 8jQ5GR1El4QtQAB | 2020-03-20 00:00:00 | 2020-03 |
-| 8lQ5GR1Uh4QtQAF | 2020-10-23 00:00:00 | 2020-10 |
 | 8mQ5GR1Nb4QtQAB | 2020-07-11 00:00:00 | 2020-07 |
 | 8NQ5GR1Kh4QtQAR | 2020-06-06 00:00:00 | 2020-06 |
 | 8QQ5GR1Bh4QtQAR | 2020-05-20 00:00:00 | 2020-05 |
@@ -7078,7 +7087,6 @@ There are no results to be displayed.
 | 8wQ5GR0WE4QtQAD | 2020-02-28 00:00:00 | 2020-02 |
 | 94Q5GR10o4QtQAA | 2020-03-08 00:00:00 | 2020-03 |
 | 96Q5GR1SD4QtQAH | 2020-09-18 00:00:00 | 2020-09 |
-| 9aQ5GR1Ao4QtQAF | 2020-04-23 00:00:00 | 2020-04 |
 | 9BQ5GR1O24QtQAR | 2020-07-30 00:00:00 | 2020-07 |
 | 9cQ5GR0rg4QtQAA | 2020-07-17 00:00:00 | 2020-07 |
 | 9CQ5GR1de4QtQAQ | 2021-01-26 00:00:00 | 2021-01 |
@@ -7174,7 +7182,6 @@ There are no results to be displayed.
 | cBQ5GR1de4QtQAU | 2021-01-25 00:00:00 | 2021-01 |
 | cgQ5GR1bY4QtQAC | 2020-12-23 00:00:00 | 2020-12 |
 | cHQ5GR0BH4QtQAX | 2020-02-23 00:00:00 | 2020-02 |
-| CKQ5GR1d54QtQAY | 2021-01-18 00:00:00 | 2021-01 |
 | CkQ5GR1Iz4QtQAJ | 2020-12-08 00:00:00 | 2020-12 |
 | ckQ5GR1Sn4QtQAF | 2020-09-21 00:00:00 | 2020-09 |
 | cLQ5GR1Bg4QtQAR | 2020-03-21 00:00:00 | 2020-03 |
@@ -7317,7 +7324,6 @@ There are no results to be displayed.
 | gkQ5GR1Bg4QtQAB | 2020-03-20 00:00:00 | 2020-03 |
 | glQ5GR1SC4QtQAH | 2020-09-10 00:00:00 | 2020-09 |
 | gMQ5GR19b4QtQAU | 2020-02-27 00:00:00 | 2020-02 |
-| GmQ5GR1Wx4QtQAJ | 2020-11-18 00:00:00 | 2020-11 |
 | gnQ5GR1NY4QtQAD | 2020-07-02 00:00:00 | 2020-07 |
 | gNQ5GR1O14QtQAR | 2020-07-14 00:00:00 | 2020-07 |
 | GNQ5GR1TU4QtQA1 | 2020-10-12 00:00:00 | 2020-10 |
@@ -7356,19 +7362,17 @@ There are no results to be displayed.
 | HiQ5GR1Wy4QtQAN | 2020-12-18 00:00:00 | 2020-12 |
 | HJQ5GR1YV4QtQA1 | 2020-12-11 00:00:00 | 2020-12 |
 | hkQ5GR1O24QtQAB | 2020-07-21 00:00:00 | 2020-07 |
-| HKQ5GR1Ou4QtQAZ | 2020-07-01 00:00:00 | 2020-07 |
 | HlQ5GR0rg4QtQAM | 2020-03-11 00:00:00 | 2020-03 |
 | HNQ5GR0M84QtQAZ | 2020-02-29 00:00:00 | 2020-02 |
 | hnQ5GR1O34QtQAB | 2020-08-28 00:00:00 | 2020-08 |
 | HnQ5GR1S94QtQAJ | 2020-09-03 00:00:00 | 2020-09 |
 | hNQ5GR1Ui4QtQAV | 2020-12-07 00:00:00 | 2020-12 |
-| HPQ5GR1Ou4QtQAZ | 2020-07-06 00:00:00 | 2020-07 |
 | hQQ5GR14p4QtQAQ | 2020-03-21 00:00:00 | 2020-03 |
 | hqQ5GR1R14QtQAF | 2020-09-29 00:00:00 | 2020-09 |
 | HsQ5GR0bv4QtQAI | 2020-03-20 00:00:00 | 2020-03 |
 | HsQ5GR1WQ4QtQAL | 2020-11-09 00:00:00 | 2020-11 |
 | HtQ5GR0mU4QtQAO | 2020-02-28 00:00:00 | 2020-02 |
-| hTQ5GR1NZ4QtQAT | 2020-08-31 00:00:00 | 2020-08 |
+| hTQ5GR1NZ4QtQAT | 2020-09-08 00:00:00 | 2020-09 |
 | hUQ5GR1Z24QtQAR | 2020-11-27 00:00:00 | 2020-11 |
 | HVQ5GR1UA4QtQA1 | 2020-11-08 00:00:00 | 2020-11 |
 | HwQ5GR1SC4QtQAL | 2020-09-11 00:00:00 | 2020-09 |
@@ -7379,7 +7383,6 @@ There are no results to be displayed.
 | I0Q5GR1Uh4QtQAJ | 2020-10-09 00:00:00 | 2020-10 |
 | i1Q5GR11F4QtQAG | 2020-02-29 00:00:00 | 2020-02 |
 | I2Q5GR1WA4QtQAL | 2020-11-06 00:00:00 | 2020-11 |
-| I3Q5GR1Nc4QtQAJ | 2020-07-11 00:00:00 | 2020-07 |
 | I4Q5GR14p4QtQAM | 2020-03-21 00:00:00 | 2020-03 |
 | I5Q5GR1ek4QtQAM | 2021-01-27 00:00:00 | 2021-01 |
 | I6Q5GR1Mq4QtQAJ | 2020-06-25 00:00:00 | 2020-06 |
@@ -7387,7 +7390,6 @@ There are no results to be displayed.
 | iaQ5GR1Wd4QtQAF | 2020-11-11 00:00:00 | 2020-11 |
 | IBQ5GR0zQ4QtQA0 | 2020-03-10 00:00:00 | 2020-03 |
 | IcQ5GR0t44QtQAI | 2020-03-01 00:00:00 | 2020-03 |
-| iDQ5GR1NZ4QtQAT | 2020-10-21 00:00:00 | 2020-10 |
 | IEQ5GR1Mp4QtQA3 | 2020-06-17 00:00:00 | 2020-06 |
 | iFQ5GR0hb4QtQAU | 2020-03-17 00:00:00 | 2020-03 |
 | IfQ5GR0p64QtQAM | 2020-03-09 00:00:00 | 2020-03 |
@@ -7422,7 +7424,6 @@ There are no results to be displayed.
 | J0Q5GR07s4QtQAM | 2020-02-26 00:00:00 | 2020-02 |
 | j0Q5GR12E4QtQAG | 2020-03-20 00:00:00 | 2020-03 |
 | J0Q5GR1Wg4QtQAJ | 2020-12-02 00:00:00 | 2020-12 |
-| J2Q5GR1Mp4QtQAN | 2020-06-17 00:00:00 | 2020-06 |
 | J3Q5GR1UA4QtQAL | 2020-10-10 00:00:00 | 2020-10 |
 | j5Q5GR1Bg4QtQAB | 2020-02-29 00:00:00 | 2020-02 |
 | j5Q5GR1UA4QtQAH | 2020-11-05 00:00:00 | 2020-11 |
@@ -7494,7 +7495,6 @@ There are no results to be displayed.
 | krQ5GR1SC4QtQAD | 2020-10-13 00:00:00 | 2020-10 |
 | KSQ5GR13k4QtQA2 | 2020-03-02 00:00:00 | 2020-03 |
 | ksQ5GR1TT4QtQAD | 2020-09-25 00:00:00 | 2020-09 |
-| kTQ5GR0WF4QtQAT | 2020-03-07 00:00:00 | 2020-03 |
 | KTQ5GR1UA4QtQA5 | 2020-12-08 00:00:00 | 2020-12 |
 | KVQ5GR1bX4QtQA4 | 2021-01-21 00:00:00 | 2021-01 |
 | KVQ5GR1R24QtQA3 | 2020-08-24 00:00:00 | 2020-08 |
@@ -7514,7 +7514,6 @@ There are no results to be displayed.
 | lIQ5GR1264QtQAQ | 2020-02-26 00:00:00 | 2020-02 |
 | lIQ5GR1de4QtQAU | 2021-01-19 00:00:00 | 2021-01 |
 | LJQ5GR1NZ4QtQA1 | 2020-08-07 00:00:00 | 2020-08 |
-| ljQ5GR1Vk4QtQAB | 2020-10-28 00:00:00 | 2020-10 |
 | LLQ5GR0bx4QtQA2 | 2020-02-27 00:00:00 | 2020-02 |
 | lLQ5GR1244QtQAU | 2020-02-29 00:00:00 | 2020-02 |
 | LlQ5GR1Wc4QtQAJ | 2020-11-13 00:00:00 | 2020-11 |
@@ -7538,7 +7537,6 @@ There are no results to be displayed.
 | m3Q5GR12D4QtQAG | 2020-04-28 00:00:00 | 2020-04 |
 | M5Q5GR1Zr4QtQAN | 2020-12-02 00:00:00 | 2020-12 |
 | M6Q5GR18t4QtQAI | 2020-03-18 00:00:00 | 2020-03 |
-| M7Q5GR19b4QtQAI | 2020-02-29 00:00:00 | 2020-02 |
 | M7Q5GR1EI4QtQAL | 2020-03-04 00:00:00 | 2020-03 |
 | m7Q5GR1Iz4QtQAF | 2020-04-14 00:00:00 | 2020-04 |
 | M7Q5GR1SZ4QtQAP | 2020-09-21 00:00:00 | 2020-09 |
@@ -7629,7 +7627,6 @@ There are no results to be displayed.
 | oiQ5GR1RP4QtQAD | 2020-08-28 00:00:00 | 2020-08 |
 | OjQ5GR1de4QtQAI | 2021-01-25 00:00:00 | 2021-01 |
 | oJQ5GR1O34QtQAV | 2020-07-30 00:00:00 | 2020-07 |
-| OjQ5GR1UA4QtQAL | 2020-10-06 00:00:00 | 2020-10 |
 | OLQ5GR0zQ4QtQA0 | 2020-03-02 00:00:00 | 2020-03 |
 | oNQ5GR14q4QtQAQ | 2020-03-16 00:00:00 | 2020-03 |
 | ooQ5GR1R14QtQAB | 2020-08-24 00:00:00 | 2020-08 |
@@ -7640,13 +7637,12 @@ There are no results to be displayed.
 | otQ5GR0Tc4QtQAF | 2020-02-29 00:00:00 | 2020-02 |
 | OTQ5GR1Bg4QtQAZ | 2020-03-21 00:00:00 | 2020-03 |
 | owQ5GR1Mr4QtQAB | 2020-06-29 00:00:00 | 2020-06 |
-| oxQ5GR1az4QtQAA | 2020-12-27 00:00:00 | 2020-12 |
+| oxQ5GR1az4QtQAA | 2021-01-06 00:00:00 | 2021-01 |
 | OyQ5GR1X14QtQAN | 2020-11-19 00:00:00 | 2020-11 |
 | P1Q5GR1R24QtQAN | 2020-08-11 00:00:00 | 2020-08 |
 | P2Q5GR1R24QtQAN | 2020-08-13 00:00:00 | 2020-08 |
 | p6Q5GR0BF4QtQAH | 2020-03-08 00:00:00 | 2020-03 |
 | P6Q5GR0KB4QtQAL | 2020-03-10 00:00:00 | 2020-03 |
-| P6Q5GR1R24QtQAN | 2020-08-10 00:00:00 | 2020-08 |
 | P7Q5GR1Js4QtQAN | 2020-05-01 00:00:00 | 2020-05 |
 | P7Q5GR1T34QtQAJ | 2020-09-16 00:00:00 | 2020-09 |
 | p8Q5GR0t34QtQAA | 2020-03-20 00:00:00 | 2020-03 |
@@ -7660,7 +7656,6 @@ There are no results to be displayed.
 | PGQ5GR1Rh4QtQAZ | 2020-10-07 00:00:00 | 2020-10 |
 | pHQ5GR1KF4QtQAX | 2020-04-28 00:00:00 | 2020-04 |
 | pIQ5GR0dO4QtQAS | 2020-09-30 00:00:00 | 2020-09 |
-| PkQ5GR1Rh4QtQAJ | 2020-08-26 00:00:00 | 2020-08 |
 | PLQ5GR17G4QtQA0 | 2020-02-24 00:00:00 | 2020-02 |
 | PMQ5GR1NY4QtQA1 | 2020-07-07 00:00:00 | 2020-07 |
 | pOQ5GR1NY4QtQAT | 2020-08-22 00:00:00 | 2020-08 |
@@ -7701,10 +7696,8 @@ There are no results to be displayed.
 | QhQ5GR1RQ4QtQAP | 2020-08-23 00:00:00 | 2020-08 |
 | QiQ5GR1TU4QtQAP | 2020-12-23 00:00:00 | 2020-12 |
 | qjQ5GR1Rh4QtQAB | 2020-09-03 00:00:00 | 2020-09 |
-| QJQ5GR1Rh4QtQAZ | 2020-08-24 00:00:00 | 2020-08 |
 | QKQ5GR1244QtQAY | 2020-03-23 00:00:00 | 2020-03 |
 | qlQ5GR0BF4QtQAH | 2020-02-27 00:00:00 | 2020-02 |
-| QlQ5GR1RQ4QtQAP | 2020-08-17 00:00:00 | 2020-08 |
 | qLQ5GR1TU4QtQAT | 2020-10-01 00:00:00 | 2020-10 |
 | QMQ5GR1Bf4QtQA3 | 2020-05-19 00:00:00 | 2020-05 |
 | QmQ5GR1Ie4QtQAN | 2020-04-04 00:00:00 | 2020-04 |
@@ -7762,7 +7755,6 @@ There are no results to be displayed.
 | rsQ5GR1Fo4QtQAB | 2020-03-20 00:00:00 | 2020-03 |
 | rSQ5GR1Rh4QtQAR | 2020-09-01 00:00:00 | 2020-09 |
 | rtQ5GR1Hv4QtQAF | 2020-04-03 00:00:00 | 2020-04 |
-| RWQ5GR1db4QtQAY | 2021-01-18 00:00:00 | 2021-01 |
 | rwQ5GR1Kh4QtQAF | 2020-05-12 00:00:00 | 2020-05 |
 | rYQ5GR1II4QtQAT | 2020-04-14 00:00:00 | 2020-04 |
 | RYQ5GR1Yx4QtQA3 | 2020-11-24 00:00:00 | 2020-11 |
@@ -7818,7 +7810,7 @@ There are no results to be displayed.
 | tIQ5GR0mU4QtQAW | 2020-02-27 00:00:00 | 2020-02 |
 | TiQ5GR1We4QtQAN | 2020-11-16 00:00:00 | 2020-11 |
 | TjQ5GR1UB4QtQAL | 2020-10-09 00:00:00 | 2020-10 |
-| tkQ5GR1R24QtQAB | 2020-08-17 00:00:00 | 2020-08 |
+| tkQ5GR1R24QtQAB | 2020-09-17 00:00:00 | 2020-09 |
 | TLQ5GR1T44QtQAZ | 2020-09-19 00:00:00 | 2020-09 |
 | tNQ5GR1We4QtQAR | 2020-11-12 00:00:00 | 2020-11 |
 | tpQ5GR1bY4QtQAC | 2021-01-02 00:00:00 | 2021-01 |
@@ -7882,7 +7874,6 @@ There are no results to be displayed.
 | vCQ5GR1RQ4QtQAX | 2020-10-03 00:00:00 | 2020-10 |
 | vCQ5GR1SC4QtQAT | 2020-09-29 00:00:00 | 2020-09 |
 | VeQ5GR1Sn4QtQAN | 2020-09-15 00:00:00 | 2020-09 |
-| VfQ5GR1T64QtQAN | 2020-09-24 00:00:00 | 2020-09 |
 | vgQ5GR1R24QtQAB | 2020-08-10 00:00:00 | 2020-08 |
 | VGQ5GR1Zg4QtQAZ | 2020-12-24 00:00:00 | 2020-12 |
 | vhQ5GR1TR4QtQAH | 2020-09-24 00:00:00 | 2020-09 |
@@ -7900,7 +7891,6 @@ There are no results to be displayed.
 | VrQ5GR1Ww4QtQAJ | 2020-11-30 00:00:00 | 2020-11 |
 | vsQ5GR1KF4QtQAH | 2020-04-28 00:00:00 | 2020-04 |
 | vtQ5GR1Nc4QtQAF | 2020-07-18 00:00:00 | 2020-07 |
-| VuQ5GR1D84QtQAJ | 2020-03-06 00:00:00 | 2020-03 |
 | VUQ5GR1de4QtQA2 | 2021-01-22 00:00:00 | 2021-01 |
 | vXQ5GR1TR4QtQAX | 2020-09-24 00:00:00 | 2020-09 |
 | vYQ5GR1KF4QtQAX | 2020-05-28 00:00:00 | 2020-05 |
@@ -7926,12 +7916,11 @@ There are no results to be displayed.
 | wFQ5GR1O34QtQAV | 2020-08-17 00:00:00 | 2020-08 |
 | whQ5GR1L34QtQAB | 2020-05-15 00:00:00 | 2020-05 |
 | whQ5GR1WS4QtQAD | 2021-01-09 00:00:00 | 2021-01 |
-| WKQ5GR1PT4QtQA5 | 2020-09-15 00:00:00 | 2020-09 |
+| WKQ5GR1PT4QtQA5 | 2020-10-07 00:00:00 | 2020-10 |
 | wKQ5GR1RQ4QtQAX | 2020-08-27 00:00:00 | 2020-08 |
 | WkQ5GR1T34QtQAN | 2020-10-05 00:00:00 | 2020-10 |
 | WKQ5GR1Yw4QtQA3 | 2020-11-25 00:00:00 | 2020-11 |
 | WlQ5GR1L64QtQAN | 2020-06-25 00:00:00 | 2020-06 |
-| wmQ5GR06N4QtQAC | 2020-03-05 00:00:00 | 2020-03 |
 | WmQ5GR1bY4QtQAO | 2020-12-23 00:00:00 | 2020-12 |
 | wnQ5GR06N4QtQAC | 2020-03-17 00:00:00 | 2020-03 |
 | wPQ5GR1O34QtQAV | 2020-07-30 00:00:00 | 2020-07 |
@@ -8062,14 +8051,13 @@ There are no results to be displayed.
 | ZHQ5GR1Na4QtQA3 | 2020-07-14 00:00:00 | 2020-07 |
 | ZhQ5GR1NY4QtQAL | 2020-07-12 00:00:00 | 2020-07 |
 | ZJQ5GR1R44QtQAZ | 2020-08-20 00:00:00 | 2020-08 |
-| zjQ5GR1Uy4QtQAF | 2020-10-21 00:00:00 | 2020-10 |
+| zjQ5GR1Uy4QtQAF | 2020-10-22 00:00:00 | 2020-10 |
 | ZkQ5GR1T54QtQAN | 2020-11-20 00:00:00 | 2020-11 |
 | ZLQ5GR18t4QtQAY | 2020-03-13 00:00:00 | 2020-03 |
 | ZmQ5GR1T34QtQAN | 2020-09-14 00:00:00 | 2020-09 |
 | ZNQ5GR1T44QtQAZ | 2020-09-22 00:00:00 | 2020-09 |
 | ZOQ5GR1TV4QtQA5 | 2021-01-07 00:00:00 | 2021-01 |
 | zQQ5GR0ff4QtQAQ | 2020-03-16 00:00:00 | 2020-03 |
-| zQQ5GR1R24QtQAR | 2020-08-14 00:00:00 | 2020-08 |
 | zrQ5GR1Jq4QtQAF | 2020-04-23 00:00:00 | 2020-04 |
 | zSQ5GR1Ov4QtQAV | 2020-08-04 00:00:00 | 2020-08 |
 | ztQ5GR1Ha4QtQAF | 2020-03-28 00:00:00 | 2020-03 |
@@ -8084,20 +8072,20 @@ There are no results to be displayed.
 
 ---
 
-**Query #3**
+**Query #4**
 
     CREATE TABLE transaction_periods AS
-    	SELECT td.payment_id, td.account_id, cc.cohort, td.payment_usd,
-    TIMESTAMPDIFF(MONTH, cc.first_payment, td.payment_date) AS period
-    	FROM transaction_data AS td
+    	SELECT t.payment_id, t.account_id, cc.cohort, t.payment_usd,
+    TIMESTAMPDIFF(MONTH, cc.first_payment, t.payment_date) AS period
+    	FROM transactions AS t
     	INNER JOIN customer_cohorts AS cc
-    	ON cc.account_id = td.account_id;
+    	ON cc.account_id = t.account_id;
 
 There are no results to be displayed.
 
 ---
 
-**Query #4**
+**Query #5**
 
     SELECT *
     FROM transaction_periods;
@@ -8114,7 +8102,6 @@ There are no results to be displayed.
 | PsQfR06N8dQAO | hGQ5GR1EI4QtQAT | 2020-08 | 250         | 5      |
 | PrQfR06N8dQAO | V2Q5GR1de4QtQAI | 2021-01 | 250         | 0      |
 | PkQfR06N8dQAO | HtQ5GR0mU4QtQAO | 2020-02 | 50          | 11     |
-| PfQfR06N8dQAO | ljQ5GR1Vk4QtQAB | 2020-10 | 1           | 3      |
 | PeQfR06N8dQAO | s1Q5GR1ek4QtQAA | 2021-01 | 500         | 0      |
 | PdQfR06N8dQAO | hqQ5GR1R14QtQAF | 2020-09 | 250         | 3      |
 | P0QfR06N8dQAO | S8Q5GR1RP4QtQAL | 2020-08 | 2990.16     | 5      |
@@ -8161,7 +8148,6 @@ There are no results to be displayed.
 | PmQfR06N8dQAO | lxQ5GR0zQ4QtQAC | 2020-02 | 50          | 11     |
 | PhQfR06N8dQAO | d3Q5GR1VC4QtQAH | 2020-10 | 30          | 3      |
 | P1QfR06N8dQAO | O7Q5GR1YP4QtQAL | 2020-11 | 1615.63     | 2      |
-| OZQfR06N8dQA4 | PkQ5GR1Rh4QtQAJ | 2020-08 | 1           | 5      |
 | OWQfR06N8dQA4 | 5SQ5GR1ek4QtQAU | 2021-01 | 50          | 0      |
 | OVQfR06N8dQA4 | 3YQ5GR1Ux4QtQAR | 2020-10 | 50          | 3      |
 | OuQfR06N8dQAO | 8uQ5GR1L44QtQAB | 2020-06 | 1411.56     | 7      |
@@ -8326,7 +8312,6 @@ There are no results to be displayed.
 | ngQfR06N8dQAG | kEQ5GR1cf4QtQAQ | 2021-01 | 250         | 0      |
 | nfQfR06N8dQAG | QgQ5GR1RQ4QtQAP | 2020-08 | 250         | 5      |
 | neQfR06N8dQAG | fVQ5GR0Qw4QtQAV | 2021-01 | 250         | 0      |
-| ndQfR06N8dQAG | iDQ5GR1NZ4QtQAT | 2020-10 | 1           | 3      |
 | ncQfR06N8dQAG | ckQ5GR1Sn4QtQAF | 2020-09 | 50          | 4      |
 | nbQfR06N8dQAG | M7Q5GR1SZ4QtQAP | 2020-09 | 50          | 4      |
 | naQfR06N8dQAG | yzQ5GR1RQ4QtQAD | 2020-08 | 50          | 5      |
@@ -8394,7 +8379,6 @@ There are no results to be displayed.
 | oaQfR06N8dQAG | BPQ5GR1bY4QtQA4 | 2020-12 | 1091.84     | 1      |
 | o9QfR06N8dQAG | P6Q5GR0KB4QtQAL | 2020-03 | 500         | 10     |
 | o8QfR06N8dQAG | tBQ5GR1SC4QtQAT | 2020-09 | 500         | 4      |
-| o1QfR06N8dQAG | RWQ5GR1db4QtQAY | 2021-01 | 1           | 0      |
 | ntQfR06N8dQAG | WcQ5GR1Ow4QtQAN | 2020-08 | 50          | 5      |
 | nqQfR06N8dQAG | O9Q5GR1Ww4QtQAN | 2020-11 | 30          | 2      |
 | npQfR06N8dQAG | sSQ5GR1Ww4QtQAR | 2020-11 | 30          | 2      |
@@ -8410,8 +8394,6 @@ There are no results to be displayed.
 | mxQfR06N8dQAG | IrQ5GR0t34QtQAM | 2020-03 | 3594.49     | 10     |
 | mWQfR06N8dQAW | 4BQ5GR1Ou4QtQAR | 2020-08 | 250         | 5      |
 | mTQfR06N8dQAW | C6Q5GR1bO4QtQAK | 2020-12 | 125         | 1      |
-| mSQfR06N8dQAW | CKQ5GR1d54QtQAY | 2021-01 | 1           | 0      |
-| mQQfR06N8dQAW | GmQ5GR1Wx4QtQAJ | 2020-11 | 1           | 2      |
 | mkQfR06N8dQAG | apQ5GR12C4QtQAC | 2020-03 | 500         | 10     |
 | mJQfR06N8dQAW | foQ5GR0bw4QtQAA | 2020-03 | 50          | 10     |
 | mIQfR06N8dQAW | jbQ5GR1Fn4QtQAF | 2020-09 | 50          | 4      |
@@ -8439,7 +8421,6 @@ There are no results to be displayed.
 | mzQfR06N8dQAG | ROQ5GR1Mp4QtQAZ | 2020-06 | 888.77      | 7      |
 | myQfR06N8dQAG | XZQ5GR1L34QtQAZ | 2020-07 | 1249.11     | 6      |
 | mwQfR06N8dQAG | 0hQ5GR1Mp4QtQAB | 2020-06 | 861.56      | 7      |
-| mRQfR06N8dQAW | QlQ5GR1RQ4QtQAP | 2020-08 | 1           | 5      |
 | mPQfR06N8dQAW | iFQ5GR0hb4QtQAU | 2020-03 | 100         | 10     |
 | mOQfR06N8dQAW | 33Q5GR0bw4QtQAE | 2021-01 | 100         | 0      |
 | mnQfR06N8dQAG | wnQ5GR06N4QtQAC | 2020-03 | 500         | 10     |
@@ -8495,7 +8476,6 @@ There are no results to be displayed.
 | tZQfR06N8dQAW | cTQ5GR0bx4QtQAQ | 2020-03 | 800         | 10     |
 | tYQfR06N8dQAW | ZHQ5GR1Na4QtQA3 | 2020-07 | 250         | 6      |
 | tXQfR06N8dQAW | tYQ5GR1SD4QtQAX | 2020-09 | 30          | 4      |
-| tWQfR06N8dQAW | zQQ5GR1R24QtQAR | 2020-08 | 1           | 5      |
 | tVQfR06N8dQAW | rYQ5GR1II4QtQAT | 2020-04 | 500         | 9      |
 | taQfR06N8dQAG | gNQ5GR1O14QtQAR | 2020-07 | 518.25      | 6      |
 | t9QfR06N8dQAG | tWQ5GR1PV4QtQAT | 2020-08 | 30          | 5      |
@@ -8503,7 +8483,6 @@ There are no results to be displayed.
 | svQfR06N8dQAG | F2Q5GR1ci4QtQAI | 2021-01 | 500         | 0      |
 | suQfR06N8dQAG | 5KQ5GR13l4QtQAQ | 2020-03 | 25          | 10     |
 | stQfR06N8dQAG | 8bQ5GR1SD4QtQAH | 2020-09 | 2351.9      | 4      |
-| ssQfR06N8dQAG | 7KQ5GR1TV4QtQAX | 2020-09 | 1           | 3      |
 | srQfR06N8dQAG | 2gQ5GR1L44QtQAB | 2020-08 | 503         | 5      |
 | sqQfR06N8dQAG | zaQ5GR1R24QtQAB | 2020-08 | 840.28      | 5      |
 | spQfR06N8dQAG | NEQ5GR1EI4QtQA1 | 2020-05 | 1.05        | 8      |
@@ -8529,7 +8508,6 @@ There are no results to be displayed.
 | t5QfR06N8dQAG | h4Q5GR0p44QtQAA | 2020-03 | 250         | 10     |
 | t2QfR06N8dQAG | Q4Q5GR1Ou4QtQAN | 2020-08 | 125         | 5      |
 | t1QfR06N8dQAG | 1PQ5GR1Bd4QtQAR | 2020-03 | 32.5        | 10     |
-| t0QfR06N8dQAG | V8Q5GR1WC4QtQAL | 2020-11 | 1           | 2      |
 | szQfR06N8dQAG | lRQ5GR1ci4QtQAQ | 2021-01 | 30          | 0      |
 | syQfR06N8dQAG | aHQ5GR1Wc4QtQAR | 2020-11 | 30          | 2      |
 | sxQfR06N8dQAG | LlQ5GR1Wc4QtQAJ | 2020-11 | 30          | 2      |
@@ -8572,7 +8550,6 @@ There are no results to be displayed.
 | tFQfR06N8dQAW | lcQ5GR1cf4QtQAE | 2020-12 | 25          | 0      |
 | sZQfR06N8dQAW | HJQ5GR1YV4QtQA1 | 2020-12 | 250         | 1      |
 | sXQfR06N8dQAW | 4oQ5GR1cj4QtQAA | 2021-01 | 125         | 0      |
-| sWQfR06N8dQAW | I3Q5GR1Nc4QtQAJ | 2020-07 | 1           | 6      |
 | sQQfR06N8dQAW | G8Q5GR1D94QtQAN | 2020-08 | 50          | 4      |
 | sPQfR06N8dQAW | 8mQ5GR1Nb4QtQAB | 2020-07 | 50          | 6      |
 | sOQfR06N8dQAW | IEQ5GR1Mp4QtQA3 | 2020-06 | 50          | 6      |
@@ -8601,7 +8578,6 @@ There are no results to be displayed.
 | 8KQfR06N8dQAW | vOQ5GR1PS4QtQAT | 2020-08 | 475         | 5      |
 | 8JQfR06N8dQAW | AjQ5GR1SD4QtQAP | 2020-09 | 55          | 4      |
 | 8IQfR06N8dQAW | n3Q5GR1TV4QtQAH | 2020-10 | 250         | 3      |
-| 8HQfR06N8dQAW | P6Q5GR1R24QtQAN | 2020-08 | 1           | 5      |
 | 8GQfR06N8dQAW | eCQ5GR1Mq4QtQAV | 2020-06 | 50          | 6      |
 | 7FQfR06N8dQAW | EqQ5GR1Vb4QtQAJ | 2020-11 | 30          | 2      |
 | 7EQfR06N8dQAW | WUQ5GR0p64QtQAY | 2020-03 | 4503.01     | 10     |
@@ -8698,7 +8674,7 @@ There are no results to be displayed.
 | 7WQfR06N8dQAW | UCQ5GR1W04QtQAZ | 2020-11 | 50          | 2      |
 | 7wQfR06N8dQAG | 17Q5GR07s4QtQAE | 2020-03 | 711.8       | 10     |
 | 7VQfR06N8dQAW | dJQ5GR1ce4QtQAQ | 2020-12 | 302.62      | 1      |
-| 7vQfR06N8dQAG | hTQ5GR1NZ4QtQAT | 2020-08 | 655.42      | 4      |
+| 7vQfR06N8dQAG | hTQ5GR1NZ4QtQAT | 2020-09 | 655.42      | 4      |
 | 7UQfR06N8dQAW | xcQ5GR06N4QtQAC | 2020-03 | 999.93      | 10     |
 | 7uQfR06N8dQAG | 6iQ5GR1GH4QtQAD | 2020-03 | 594.2       | 9      |
 | 7TQfR06N8dQAW | k0Q5GR0t34QtQAA | 2020-02 | 242.52      | 10     |
@@ -8775,7 +8751,6 @@ There are no results to be displayed.
 | 7OQfR06N8dQAW | ggQ5GR1cV4QtQAG | 2021-01 | 500         | 0      |
 | 7gQfR06N8dQAG | ZOQ5GR1TV4QtQA5 | 2021-01 | 500         | 0      |
 | 7fQfR06N8dQAG | A0Q5GR1aT4QtQAK | 2020-12 | 250         | 1      |
-| 7eQfR06N8dQAG | HPQ5GR1Ou4QtQAZ | 2020-07 | 1           | 6      |
 | 6NQfR06N8dQAW | hNQ5GR1Ui4QtQAV | 2020-12 | 250         | 1      |
 | 6AQfR06N8dQAW | a9Q5GR1WB4QtQAD | 2020-11 | 1539.42     | 2      |
 | 69QfR06N8dQAG | C8Q5GR1PT4QtQAP | 2020-08 | 1939.85     | 4      |
@@ -8788,7 +8763,7 @@ There are no results to be displayed.
 | 8WQfR06N8dQAW | skQ5GR1Am4QtQAB | 2020-03 | 274.59      | 10     |
 | 8VQfR06N8dQAW | SoQ5GR1KH4QtQAL | 2020-05 | 150         | 8      |
 | 8UQfR06N8dQAW | yIQ5GR1Bg4QtQAR | 2020-02 | 500         | 10     |
-| 8TQfR06N8dQAW | oxQ5GR1az4QtQAA | 2020-12 | 250         | 0      |
+| 8TQfR06N8dQAW | oxQ5GR1az4QtQAA | 2021-01 | 250         | 0      |
 | 8eQfR06N8dQAG | LDQ5GR1Mp4QtQA3 | 2020-07 | 500         | 5      |
 | 8cQfR06N8dQAG | bhQ5GR1WC4QtQAH | 2020-11 | 250         | 2      |
 | 7NQfR06N8dQAW | O7Q5GR1EK4QtQAL | 2020-03 | 62.26       | 10     |
@@ -8803,7 +8778,6 @@ There are no results to be displayed.
 | 63QfR06N8dQAG | PXQ5GR1TU4QtQA5 | 2020-10 | 75          | 3      |
 | 62QfR06N8dQAG | 6dQ5GR1L44QtQAF | 2020-10 | 500         | 3      |
 | 61QfR06N8dQAG | RkQ5GR1Va4QtQAN | 2020-11 | 500         | 2      |
-| 60QfR06N8dQAG | OjQ5GR1UA4QtQAL | 2020-10 | 1           | 3      |
 | 5zQfR06N8dQAG | I2Q5GR1WA4QtQAL | 2020-11 | 50          | 2      |
 | 5yQfR06N8dQAG | MqQ5GR1TT4QtQAL | 2020-10 | 30          | 3      |
 | 5xQfR06N8dQAG | COQ5GR1U84QtQAZ | 2020-10 | 30          | 3      |
@@ -8895,7 +8869,6 @@ There are no results to be displayed.
 | gPQfR06N8dQAS | tpQ5GR1bY4QtQAC | 2021-01 | 250         | 0      |
 | gOQfR06N8dQAS | qRQ5GR1RQ4QtQAX | 2020-09 | 250         | 4      |
 | gNQfR06N8dQAS | jwQ5GR1ZT4QtQAD | 2020-12 | 125         | 1      |
-| gMQfR06N8dQAS | HKQ5GR1Ou4QtQAZ | 2020-07 | 1           | 6      |
 | gLQfR06N8dQAS | 17Q5GR1Vz4QtQAB | 2020-11 | 50          | 2      |
 | gKQfR06N8dQAS | kNQ5GR1U94QtQAV | 2020-10 | 50          | 3      |
 | gAQfR06N8dQAS | vYQ5GR1T34QtQAV | 2020-09 | 25          | 3      |
@@ -9000,7 +8973,6 @@ There are no results to be displayed.
 | KXQfR06N8dQA0 | ytQ5GR1D84QtQAB | 2020-02 | 250         | 10     |
 | KwQfR06N8dQAK | 5jQ5GR1Uz4QtQAB | 2020-10 | 486.12      | 1      |
 | KWQfR06N8dQA0 | OHQ5GR1O24QtQAZ | 2020-10 | 125         | 2      |
-| KUQfR06N8dQA0 | ljQ5GR1Vk4QtQAB | 2020-10 | 1           | 2      |
 | KtQfR06N8dQAK | ctQ5GR1TR4QtQAH | 2020-10 | 290.23      | 2      |
 | KmQfR06N8dQAK | 6iQ5GR1O14QtQAB | 2020-07 | 150         | 5      |
 | KlQfR06N8dQAK | OSQ5GR1R24QtQA3 | 2020-08 | 150         | 4      |
@@ -9017,7 +8989,6 @@ There are no results to be displayed.
 | z7QfR06N8dQAC | luQ5GR1NY4QtQAD | 2020-07 | 1134.61     | 4      |
 | z0QfR06N8dQAC | 4gQ5GR1L54QtQAF | 2020-05 | 500         | 7      |
 | yrQfR06N8dQAC | zDQ5GR1T44QtQAR | 2020-11 | 50          | 1      |
-| KTQfR06N8dQA0 | oxQ5GR1az4QtQAA | 2020-12 | 1           | 0      |
 | DZQfR06N8dQA0 | 1hQ5GR0eA4QtQAG | 2020-02 | 500         | 10     |
 | DVQfR06N8dQA0 | DXQ5GR1Gz4QtQAZ | 2020-03 | 250         | 9      |
 | DqQfR06N8dQAK | qSQ5GR14r4QtQAU | 2020-02 | 50          | 10     |
@@ -9039,7 +9010,6 @@ There are no results to be displayed.
 | DJQfR06N8dQA0 | lwQ5GR1Z24QtQAB | 2020-11 | 125         | 1      |
 | DiQfR06N8dQAK | RcQ5GR0p44QtQAI | 2020-02 | 1155.52     | 10     |
 | DHQfR06N8dQA0 | yOQ5GR1Mr4QtQAV | 2020-06 | 1100        | 5      |
-| DGQfR06N8dQA0 | PkQ5GR1Rh4QtQAJ | 2020-08 | 1           | 4      |
 | DfQfR06N8dQAK | 67Q5GR1Bg4QtQAB | 2020-02 | 794.87      | 10     |
 | DEQfR06N8dQA0 | 2AQ5GR0zQ4QtQAS | 2020-02 | 50          | 10     |
 | DDQfR06N8dQA0 | 3YQ5GR1Ux4QtQAR | 2020-10 | 50          | 2      |
@@ -9179,7 +9149,6 @@ There are no results to be displayed.
 | 73QfR06N8dQAC | EOQ5GR1b54QtQAY | 2020-12 | 50          | 0      |
 | 6tQfR06N8dQAC | lcQ5GR1cf4QtQAE | 2020-12 | 25          | 0      |
 | 6PQfR06N8dQAS | GEQ5GR1Uy4QtQA3 | 2020-11 | 94.62       | 1      |
-| 64QfR06N8dQAC | iDQ5GR1NZ4QtQAT | 2020-10 | 1           | 2      |
 | 60QfR06N8dQAC | mCQ5GR1T44QtQAR | 2020-09 | 250         | 3      |
 | 5zQfR06N8dQAC | ckQ5GR1Sn4QtQAF | 2020-09 | 50          | 3      |
 | 5xQfR06N8dQAC | M7Q5GR1SZ4QtQAP | 2020-09 | 50          | 3      |
@@ -9227,7 +9196,6 @@ There are no results to be displayed.
 | 0mQfR06N8dQAC | qsQ5GR0t34QtQAA | 2020-03 | 500         | 9      |
 | 0cQfR06N8dQAC | dHQ5GR0p44QtQAQ | 2020-03 | 934.35      | 9      |
 | xYQfR06N8dQAS | C6Q5GR1bO4QtQAK | 2020-12 | 125         | 0      |
-| xLQfR06N8dQAS | GmQ5GR1Wx4QtQAJ | 2020-11 | 1           | 1      |
 | xeQfR06N8dQAC | JBQ5GR1Fn4QtQAZ | 2020-03 | 250         | 9      |
 | wKQfR06N8dQAS | tBQ5GR1SC4QtQAT | 2020-09 | 500         | 3      |
 | wAQfR06N8dQAS | RQQ5GR1R24QtQAZ | 2020-08 | 50          | 4      |
@@ -9262,7 +9230,6 @@ There are no results to be displayed.
 | xIQfR06N8dQAS | TiQ5GR1We4QtQAN | 2020-11 | 952.54      | 1      |
 | wRQfR06N8dQAS | UGQ5GR1Sn4QtQAZ | 2020-09 | 500         | 3      |
 | w7QfR06N8dQAC | bYQ5GR1Ou4QtQAV | 2020-07 | 2425.08     | 4      |
-| w3QfR06N8dQAC | QlQ5GR1RQ4QtQAP | 2020-08 | 1           | 4      |
 | TXQfR06N8dQA0 | sNQ5GR0bw4QtQAQ | 2020-03 | 250         | 9      |
 | QEQfR06N8dQA0 | qTQ5GR1cf4QtQAU | 2020-12 | 50          | 0      |
 | QAQfR06N8dQA0 | nBQ5GR1Ic4QtQAR | 2020-04 | 1124.87     | 8      |
@@ -9303,7 +9270,6 @@ There are no results to be displayed.
 | 8DQfR06N8dQAS | YXQ5GR1Wo4QtQA3 | 2020-11 | 30          | 1      |
 | 81QfR06N8dQAC | mSQ5GR1Uh4QtQAV | 2020-10 | 30          | 2      |
 | 80QfR06N8dQAC | k5Q5GR1Uh4QtQAF | 2020-10 | 30          | 2      |
-| 77QfR06N8dQAC | mtQ5GR1Wc4QtQAB | 2020-11 | 0           | 1      |
 | 76QfR06N8dQAC | diQ5GR1Wc4QtQAB | 2020-11 | 30          | 1      |
 | 6mQfR06N8dQAC | o0Q5GR1Wo4QtQAF | 2020-11 | 250         | 1      |
 | 6lQfR06N8dQAC | bmQ5GR1Wu4QtQAF | 2020-11 | 1035        | 1      |
@@ -9329,7 +9295,6 @@ There are no results to be displayed.
 | 6IQfR06N8dQAS | RFQ5GR1Ui4QtQA3 | 2020-10 | 250         | 2      |
 | 6fQfR06N8dQAC | 0EQ5GR1WQ4QtQAT | 2020-11 | 250         | 1      |
 | 5vQfR06N8dQAC | XrQ5GR1SZ4QtQAP | 2020-09 | 500         | 3      |
-| 5sQfR06N8dQAC | fSQ5GR1SB4QtQAX | 2020-09 | 0           | 3      |
 | 5EQfR06N8dQAS | LAQ5GR1Mp4QtQAZ | 2020-06 | 500         | 5      |
 | 5cQfR06N8dQAC | J8Q5GR1T44QtQAJ | 2020-09 | 250         | 3      |
 | 5bQfR06N8dQAC | bxQ5GR1R24QtQAF | 2020-08 | 973.94      | 4      |
@@ -9350,11 +9315,8 @@ There are no results to be displayed.
 | 8AQfR06N8dQAS | t4Q5GR1SD4QtQAH | 2020-09 | 150         | 3      |
 | 89QfR06N8dQAC | tYQ5GR1SD4QtQAX | 2020-09 | 75          | 3      |
 | 7nQfR06N8dQAC | tWQ5GR1PV4QtQAT | 2020-08 | 30          | 4      |
-| 7dQfR06N8dQAC | NEQ5GR1EI4QtQA1 | 2020-05 | 0.15        | 7      |
 | 70QfR06N8dQAC | CxQ5GR1aj4QtQAI | 2020-12 | 125         | 0      |
 | 6JQfR06N8dQAS | Q4Q5GR1Uh4QtQAJ | 2020-10 | 500         | 2      |
-| 5yQfR06N8dQAC | 7KQ5GR1TV4QtQAX | 2020-09 | 1           | 2      |
-| 5WQfR06N8dQAS | zQQ5GR1R24QtQAR | 2020-08 | 1           | 4      |
 | 5QQfR06N8dQAS | ZHQ5GR1Na4QtQA3 | 2020-07 | 250         | 5      |
 | 5oQfR06N8dQAC | QbQ5GR1SZ4QtQAP | 2020-09 | 250         | 3      |
 | 5jQfR06N8dQAC | 8bQ5GR1SD4QtQAH | 2020-09 | 2079.36     | 3      |
@@ -9370,7 +9332,6 @@ There are no results to be displayed.
 | SdQfR06N8dQAK | mGQ5GR0t34QtQAU | 2020-03 | 250         | 9      |
 | 7gQfR06N8dQAC | 1PQ5GR1Bd4QtQAR | 2020-03 | 81.25       | 9      |
 | 6hQfR06N8dQAC | ygQ5GR1Wd4QtQAB | 2020-11 | 175         | 1      |
-| 6bQfR06N8dQAC | V8Q5GR1WC4QtQAL | 2020-11 | 1           | 1      |
 | 63QfR06N8dQAC | rJQ5GR1UW4QtQAX | 2020-10 | 250         | 2      |
 | 5hQfR06N8dQAC | Q4Q5GR1Ou4QtQAN | 2020-08 | 125         | 4      |
 | 1YQfR06N8dQAS | 6iQ5GR1GH4QtQAD | 2020-03 | 842.86      | 9      |
@@ -9407,7 +9368,6 @@ There are no results to be displayed.
 | wQQfR06N8dQAS | QvQ5GR1SD4QtQAP | 2020-09 | 1255.86     | 3      |
 | wNQfR06N8dQAS | y6Q5GR1SC4QtQAD | 2020-09 | 50          | 3      |
 | vNQfR06N8dQAS | W5Q5GR1Kg4QtQAJ | 2020-08 | 255         | 4      |
-| vlQfR06N8dQAC | I3Q5GR1Nc4QtQAJ | 2020-07 | 1           | 5      |
 | Q2QfR06N8dQAK | PGQ5GR1En4QtQAZ | 2020-03 | 500         | 9      |
 | Q1QfR06N8dQAK | MSQ5GR1H04QtQA3 | 2020-05 | 250         | 7      |
 | Q0QfR06N8dQAK | CQQ5GR1Gz4QtQAZ | 2020-03 | 250         | 9      |
@@ -9446,7 +9406,6 @@ There are no results to be displayed.
 | 5YQfR06N8dQAS | rfQ5GR1PV4QtQAD | 2020-08 | 1016.89     | 3      |
 | 5DQfR06N8dQAS | h8Q5GR1L74QtQAB | 2020-06 | 50          | 6      |
 | 5AQfR06N8dQAS | 6tQ5GR1L64QtQAF | 2020-06 | 50          | 6      |
-| 5aQfR06N8dQAC | P6Q5GR1R24QtQAN | 2020-08 | 1           | 4      |
 | 0hQfR06N8dQAC | WUQ5GR0p64QtQAY | 2020-03 | 3350.31     | 9      |
 | yOQfR06N8dQAS | hCQ5GR1UA4QtQAX | 2020-10 | 300         | 2      |
 | yhQfR06N8dQAC | z6Q5GR0V34QtQAF | 2020-12 | 17.61       | 0      |
@@ -9547,7 +9506,7 @@ There are no results to be displayed.
 | 6NQfR06N8dQAS | qeQ5GR1VZ4QtQAD | 2020-11 | 777.17      | 1      |
 | 66QfR06N8dQAC | WkQ5GR1T34QtQAN | 2020-10 | 1213.03     | 2      |
 | 5rQfR06N8dQAC | p8Q5GR1Ri4QtQAB | 2020-10 | 588.22      | 2      |
-| 5pQfR06N8dQAC | hTQ5GR1NZ4QtQAT | 2020-08 | 666.83      | 3      |
+| 5pQfR06N8dQAC | hTQ5GR1NZ4QtQAT | 2020-09 | 666.83      | 3      |
 | 5NQfR06N8dQAS | EKQ5GR1NY4QtQA1 | 2020-07 | 1104.57     | 4      |
 | 5mQfR06N8dQAC | caQ5GR1T34QtQAF | 2020-11 | 50          | 1      |
 | 5KQfR06N8dQAS | luQ5GR1NY4QtQAD | 2020-07 | 2631.69     | 4      |
@@ -9582,7 +9541,6 @@ There are no results to be displayed.
 | x3QfR06M8dQAC | LDQ5GR1Mp4QtQA3 | 2020-07 | 500         | 5      |
 | wyQfR06N8dQAC | StQ5GR1Ux4QtQAN | 2020-11 | 25          | 1      |
 | wuQfR06M8dQAC | 9wQ5GR0p54QtQAE | 2020-03 | 120515      | 8      |
-| w1QfR06N8dQAC | HPQ5GR1Ou4QtQAZ | 2020-07 | 1           | 5      |
 | vzQfR06N8dQAC | C8Q5GR1PT4QtQAP | 2020-08 | 2184.34     | 3      |
 | vyQfR06N8dQAC | FCQ5GR1PT4QtQA5 | 2020-08 | 1034.76     | 4      |
 | ttQfR06M8dQAC | 8HQ5GR0t34QtQAQ | 2020-03 | 4931.17     | 8      |
@@ -9635,7 +9593,6 @@ There are no results to be displayed.
 | x9QfR06N8dQAC | odQ5GR1Vz4QtQAB | 2020-11 | 125         | 1      |
 | x5QfR06M8dQAC | COQ5GR1U84QtQAZ | 2020-10 | 30          | 2      |
 | x4QfR06M8dQAC | bhQ5GR1WC4QtQAH | 2020-11 | 250         | 1      |
-| x2QfR06M8dQAC | OjQ5GR1UA4QtQAL | 2020-10 | 1           | 2      |
 | x1QfR06N8dQAC | RkQ5GR1Va4QtQAN | 2020-11 | 500         | 1      |
 | x1QfR06M8dQAC | I2Q5GR1WA4QtQAL | 2020-11 | 25          | 1      |
 | x0QfR06M8dQAC | R3Q5GR1NY4QtQAL | 2020-07 | 300         | 4      |
@@ -9645,7 +9602,6 @@ There are no results to be displayed.
 | wwQfR06M8dQAC | iIQ5GR1EI4QtQAT | 2020-03 | 50          | 9      |
 | wvQfR06M8dQAC | O7Q5GR1EK4QtQAL | 2020-03 | 70.62       | 9      |
 | wgQfR06N8dQAC | F3Q5GR1SZ4QtQAP | 2020-10 | 1511.59     | 2      |
-| SYQfR06N8dQA0 | FVQ5GR15j4QtQA2 | 2020-03 | 0           | 9      |
 | PqQfR06N8dQAK | yIQ5GR1Bg4QtQAR | 2020-02 | 500         | 9      |
 | PmQfR06N8dQAK | wzQ5GR1An4QtQAB | 2020-03 | 50          | 8      |
 | PlQfR06N8dQAK | skQ5GR1Am4QtQAB | 2020-03 | 283.78      | 9      |
@@ -9656,7 +9612,6 @@ There are no results to be displayed.
 | 7mQfR06N8dQAC | R3Q5GR1NY4QtQAL | 2020-07 | 300         | 4      |
 | 6ZQfR06N8dQAS | I2Q5GR1WA4QtQAL | 2020-11 | 25          | 1      |
 | 6cQfR06N8dQAC | bhQ5GR1WC4QtQAH | 2020-11 | 250         | 1      |
-| 6BQfR06N8dQAS | OjQ5GR1UA4QtQAL | 2020-10 | 1           | 2      |
 | 4wQfR06N8dQAC | X7Q5GR1KG4QtQAP | 2020-05 | 250         | 6      |
 | 2QQfR06M8dQAS | RkQ5GR1Va4QtQAN | 2020-11 | 500         | 1      |
 | 2PQfR06M8dQAS | atQ5GR1Ow4QtQAF | 2020-11 | 125         | 1      |
@@ -9807,7 +9762,6 @@ There are no results to be displayed.
 | tGQfR06M8dQAS | J0Q5GR1Wg4QtQAJ | 2020-12 | 250         | 0      |
 | tFQfR06M8dQAS | jwQ5GR1ZT4QtQAD | 2020-12 | 125         | 0      |
 | tEQfR06M8dQAS | atQ5GR1Ow4QtQAF | 2020-11 | 125         | 0      |
-| teQfR06M8dQAC | HKQ5GR1Ou4QtQAZ | 2020-07 | 1           | 5      |
 | tDQfR06M8dQAS | vYQ5GR1T34QtQAV | 2020-09 | 50          | 2      |
 | tCQfR06M8dQAS | W3Q5GR1ZP4QtQAL | 2020-12 | 50          | 0      |
 | tBQfR06M8dQAS | kNQ5GR1U94QtQAV | 2020-10 | 50          | 2      |
@@ -9823,7 +9777,6 @@ There are no results to be displayed.
 | 6rQfR06N8dQAC | W3Q5GR1ZP4QtQAL | 2020-12 | 50          | 0      |
 | 62QfR06N8dQAC | kNQ5GR1U94QtQAV | 2020-10 | 50          | 2      |
 | 5wQfR06N8dQAC | atQ5GR1Ow4QtQAF | 2020-11 | 125         | 0      |
-| 5MQfR06N8dQAS | HKQ5GR1Ou4QtQAZ | 2020-07 | 1           | 5      |
 | 0ZQfR06M8dQAS | I6Q5GR1Mq4QtQAJ | 2020-06 | 75          | 5      |
 | 0cQfR06M8dQAC | 7cQ5GR1L54QtQAB | 2020-06 | 30          | 6      |
 | 0bQfR06M8dQAC | faQ5GR1Ux4QtQAB | 2020-11 | 2061.16     | 1      |
@@ -9953,7 +9906,6 @@ There are no results to be displayed.
 | lhQfR0638dQAE | hGQ5GR1EI4QtQAT | 2020-08 | 250         | 3      |
 | lgQfR0638dQAE | OHQ5GR1O24QtQAZ | 2020-10 | 125         | 1      |
 | lfQfR0638dQAE | 2ZQ5GR1O34QtQAR | 2020-07 | 125         | 3      |
-| leQfR0638dQAE | ljQ5GR1Vk4QtQAB | 2020-10 | 1           | 1      |
 | lcQfR0638dQAE | HtQ5GR0mU4QtQAO | 2020-02 | 50          | 9      |
 | laQfR0638dQAE | IRQ5GR1TU4QtQA1 | 2020-09 | 25          | 2      |
 | mmQfR0638dQAE | luQ5GR1NY4QtQAD | 2020-07 | 1329.89     | 3      |
@@ -9976,7 +9928,6 @@ There are no results to be displayed.
 | CNQfR0638dQA2 | lwQ5GR1Z24QtQAB | 2020-11 | 125         | 0      |
 | CMQfR0638dQA2 | 3vQ5GR1O14QtQAB | 2020-07 | 550         | 4      |
 | CLQfR0638dQA2 | XlQ5GR1VC4QtQAL | 2020-10 | 275         | 1      |
-| CKQfR0638dQA2 | PkQ5GR1Rh4QtQAJ | 2020-08 | 1           | 3      |
 | CJQfR0638dQA2 | EVQ5GR1TS4QtQA1 | 2020-09 | 50          | 2      |
 | BnQfR0638dQAM | 3xQ5GR1Bf4QtQAB | 2020-02 | 250         | 9      |
 | BlQfR0638dQAM | d3Q5GR1VC4QtQAH | 2020-10 | 30          | 1      |
@@ -10126,7 +10077,6 @@ There are no results to be displayed.
 | ZMQfR0638dQA2 | 1jQ5GR0Po4QtQAB | 2020-03 | 375         | 8      |
 | ZLQfR0638dQA2 | 0lQ5GR1Ui4QtQAF | 2020-10 | 50          | 1      |
 | ZKQfR0638dQA2 | yzQ5GR1RQ4QtQAD | 2020-08 | 50          | 3      |
-| ZBQfR0638dQA2 | iDQ5GR1NZ4QtQAT | 2020-10 | 1           | 1      |
 | a1QfR0638dQAE | crQ5GR1Uy4QtQAF | 2020-10 | 50          | 1      |
 | a0QfR0638dQAE | XgQ5GR14p4QtQAI | 2020-03 | 700         | 8      |
 | ZZQfR0638dQA2 | TRQ5GR1R44QtQAZ | 2020-08 | 30          | 3      |
@@ -10204,7 +10154,6 @@ There are no results to be displayed.
 | ctQfR0638dQAE | tBQ5GR1SC4QtQAT | 2020-09 | 500         | 2      |
 | csQfR0638dQAE | 4BQ5GR1Ou4QtQAR | 2020-08 | 250         | 3      |
 | crQfR0638dQAE | KqQ5GR1R24QtQAJ | 2020-09 | 21.25       | 2      |
-| cqQfR0638dQAE | GmQ5GR1Wx4QtQAJ | 2020-11 | 1           | 0      |
 | cpQfR0638dQAE | foQ5GR0bw4QtQAA | 2020-03 | 50          | 8      |
 | cOQfR0638dQAU | apQ5GR12C4QtQAC | 2020-03 | 500         | 8      |
 | coQfR0638dQAE | A3Q5GR1Ux4QtQAJ | 2020-10 | 50          | 1      |
@@ -10212,7 +10161,7 @@ There are no results to be displayed.
 | cmQfR0638dQAE | UbQ5GR1EI4QtQAP | 2020-07 | 50          | 4      |
 | clQfR0638dQAE | sSQ5GR1Ww4QtQAR | 2020-11 | 30          | 0      |
 | eCQfR0638dQAU | VPQ5GR1WS4QtQA1 | 2020-11 | 250         | 0      |
-| eBQfR0638dQAU | tkQ5GR1R24QtQAB | 2020-08 | 500         | 3      |
+| eBQfR0638dQAU | tkQ5GR1R24QtQAB | 2020-09 | 500         | 2      |
 | eAQfR0638dQAU | L1Q5GR1Ha4QtQAJ | 2020-03 | 500         | 8      |
 | e9QfR0638dQAE | weQ5GR1SC4QtQAD | 2020-09 | 50          | 2      |
 | e8QfR0638dQAE | nBQ5GR1Ic4QtQAR | 2020-04 | 1111.23     | 7      |
@@ -10224,7 +10173,6 @@ There are no results to be displayed.
 | e2QfR0638dQAE | aSQ5GR1HY4QtQAX | 2020-03 | 250         | 8      |
 | e1QfR0638dQAE | sNQ5GR0bw4QtQAQ | 2020-03 | 250         | 8      |
 | e0QfR0638dQAE | 0EQ5GR1U94QtQAV | 2020-10 | 508.5       | 1      |
-| dzQfR0638dQAE | QlQ5GR1RQ4QtQAP | 2020-08 | 1           | 3      |
 | dyQfR0638dQAE | 9wQ5GR0p54QtQAE | 2020-03 | 2031.49     | 8      |
 | dxQfR0638dQAE | pZQ5GR17H4QtQAW | 2020-03 | 500         | 8      |
 | dwQfR0638dQAE | wnQ5GR06N4QtQAC | 2020-03 | 500         | 8      |
@@ -10302,8 +10250,6 @@ There are no results to be displayed.
 | iGQfR0638dQAU | ZHQ5GR1Na4QtQA3 | 2020-07 | 250         | 4      |
 | idQfR0638dQAE | tYQ5GR1SD4QtQAX | 2020-09 | 30          | 2      |
 | icQfR0638dQAE | 2gQ5GR1L44QtQAB | 2020-08 | 250         | 3      |
-| ibQfR0638dQAE | 7KQ5GR1TV4QtQAX | 2020-09 | 1           | 1      |
-| iaQfR0638dQAE | zQQ5GR1R24QtQAR | 2020-08 | 1           | 3      |
 | i1QfR0638dQAE | tWQ5GR1PV4QtQAT | 2020-08 | 30          | 3      |
 | i0QfR0638dQAE | 8bQ5GR1SD4QtQAH | 2020-09 | 1941.13     | 2      |
 | hzQfR0638dQAE | zaQ5GR1R24QtQAB | 2020-08 | 933.31      | 3      |
@@ -10368,7 +10314,6 @@ There are no results to be displayed.
 | yDQfR0638dQAU | HwQ5GR1SC4QtQAL | 2020-09 | 30          | 2      |
 | yCQfR0638dQAU | fEQ5GR1Em4QtQAR | 2020-03 | 32.5        | 7      |
 | yBQfR0638dQAU | aoQ5GR18t4QtQAA | 2020-03 | 50          | 8      |
-| yAQfR0638dQAU | I3Q5GR1Nc4QtQAJ | 2020-07 | 1           | 4      |
 | y9QfR0638dQAE | gOQ5GR1L74QtQAR | 2020-07 | 1503.22     | 3      |
 | y8QfR0638dQAE | W5Q5GR1Kg4QtQAJ | 2020-08 | 250         | 3      |
 | y7QfR0638dQAE | eEQ5GR1L64QtQAR | 2020-06 | 150         | 5      |
@@ -10395,7 +10340,6 @@ There are no results to be displayed.
 | yIQfR0638dQAU | vOQ5GR1PS4QtQAT | 2020-08 | 475         | 3      |
 | yHQfR0638dQAU | AjQ5GR1SD4QtQAP | 2020-09 | 55          | 2      |
 | yFQfR0638dQAU | n3Q5GR1TV4QtQAH | 2020-10 | 125         | 1      |
-| yEQfR0638dQAU | P6Q5GR1R24QtQAN | 2020-08 | 1           | 3      |
 | ydQfR0638dQAE | JaQ5GR1S94QtQAJ | 2020-09 | 150         | 2      |
 | ycQfR0638dQAE | jLQ5GR1SC4QtQAX | 2020-09 | 30          | 2      |
 | ybQfR0638dQAE | duQ5GR1L64QtQAB | 2020-06 | 30          | 5      |
@@ -10474,7 +10418,7 @@ There are no results to be displayed.
 | uzQfR0638dQAE | PvQ5GR1Js4QtQAN | 2020-05 | 32.5        | 6      |
 | uUQfR0638dQAU | 8HQ5GR0t34QtQAQ | 2020-03 | 300.03      | 7      |
 | uTQfR0638dQAU | cLQ5GR1O24QtQAR | 2020-07 | 103         | 3      |
-| uSQfR0638dQAU | hTQ5GR1NZ4QtQAT | 2020-08 | 671.52      | 2      |
+| uSQfR0638dQAU | hTQ5GR1NZ4QtQAT | 2020-09 | 671.52      | 1      |
 | uRQfR0638dQAU | nQQ5GR0hc4QtQAQ | 2020-06 | 1410.66     | 4      |
 | uQQfR0638dQAU | cwQ5GR15j4QtQAE | 2020-03 | 596.25      | 8      |
 | uPQfR0638dQAU | 5LQ5GR1Bg4QtQAR | 2020-02 | 833.98      | 8      |
@@ -10554,7 +10498,6 @@ There are no results to be displayed.
 | shQfR0638dQAE | sQQ5GR1L64QtQAR | 2020-11 | 375.59      | 0      |
 | sgQfR0638dQAE | FLQ5GR1NZ4QtQA1 | 2020-08 | 1010.97     | 3      |
 | sfQfR0638dQAE | AkQ5GR0p44QtQAI | 2020-03 | 36.21       | 7      |
-| seQfR0638dQAE | HPQ5GR1Ou4QtQAZ | 2020-07 | 1           | 4      |
 | sdQfR0638dQAE | QwQ5GR1L54QtQAJ | 2020-07 | 1069.43     | 3      |
 | scQfR0638dQAE | UnQ5GR1Kg4QtQAJ | 2020-07 | 500         | 3      |
 | sbQfR0638dQAE | f6Q5GR1J04QtQAF | 2020-04 | 2237.36     | 6      |
@@ -10579,7 +10522,6 @@ There are no results to be displayed.
 | tXQfR0638dQAU | A5Q5GR1An4QtQAJ | 2020-03 | 250         | 8      |
 | tWQfR0638dQAU | 6dQ5GR1L44QtQAF | 2020-10 | 125         | 1      |
 | tVQfR0638dQAU | atQ5GR1Ow4QtQAF | 2020-11 | 125         | 0      |
-| tUQfR0638dQAU | OjQ5GR1UA4QtQAL | 2020-10 | 1           | 1      |
 | tTQfR0638dQAU | y3Q5GR1KF4QtQAH | 2020-05 | 50          | 6      |
 | tSQfR0638dQAU | MqQ5GR1TT4QtQAL | 2020-10 | 30          | 1      |
 | tRQfR0638dQAU | I2Q5GR1WA4QtQAL | 2020-11 | 25          | 0      |
@@ -10666,7 +10608,6 @@ There are no results to be displayed.
 | 83QfR0638dQAE | UCQ5GR1W04QtQAZ | 2020-11 | 50          | 0      |
 | 82QfR0638dQAE | 4kQ5GR1W04QtQAB | 2020-11 | 25          | 0      |
 | 7nQfR0638dQAE | KoQ5GR0Di4QtQAN | 2020-03 | 150         | 8      |
-| 7GQfR0638dQAU | HKQ5GR1Ou4QtQAZ | 2020-07 | 1           | 4      |
 | 7FQfR0638dQAU | uDQ5GR1Ug4QtQAR | 2020-11 | 50          | 0      |
 | 7fQfR0638dQAE | kNQ5GR1U94QtQAV | 2020-10 | 50          | 1      |
 | 7EQfR0638dQAU | ctQ5GR1W94QtQAF | 2020-11 | 50          | 0      |
@@ -10770,7 +10711,6 @@ There are no results to be displayed.
 | ShQfR02t8dQAI | 2HQ5GR1Rh4QtQAV | 2020-08 | 30          | 2      |
 | SDQfR02t8dQAY | OHQ5GR1O24QtQAZ | 2020-10 | 125         | 0      |
 | SaQfR02t8dQAI | X1Q5GR1L34QtQAN | 2020-05 | 500         | 5      |
-| S0QfR02t8dQAI | ljQ5GR1Vk4QtQAB | 2020-10 | 1           | 0      |
 | RyQfR02t8dQAI | xBQ5GR1Vm4QtQAV | 2020-10 | 175         | 0      |
 | RxQfR02t8dQAI | 6iQ5GR1O14QtQAB | 2020-07 | 150         | 3      |
 | RvQfR02t8dQAI | F9Q5GR1Mr4QtQAJ | 2020-07 | 75          | 3      |
@@ -10801,7 +10741,6 @@ There are no results to be displayed.
 | SlQfR02t8dQAI | fgQ5GR1VC4QtQAH | 2020-10 | 75          | 0      |
 | SIQfR02t8dQAY | 8uQ5GR1L44QtQAB | 2020-06 | 1793.12     | 4      |
 | SGQfR02t8dQAY | yOQ5GR1Mr4QtQAV | 2020-06 | 1100        | 3      |
-| SgQfR02t8dQAI | PkQ5GR1Rh4QtQAJ | 2020-08 | 1           | 2      |
 | SfQfR02t8dQAI | XlQ5GR1VC4QtQAL | 2020-10 | 250         | 0      |
 | SeQfR02t8dQAI | PuQ5GR1Rh4QtQAJ | 2020-08 | 50          | 2      |
 | SdQfR02t8dQAI | 2AQ5GR0zQ4QtQAS | 2020-02 | 50          | 8      |
@@ -10894,7 +10833,6 @@ There are no results to be displayed.
 | IQQfR02t8dQAY | tHQ5GR19Y4QtQAW | 2020-02 | 1100        | 8      |
 | IPQfR02t8dQAY | CNQ5GR1T34QtQAZ | 2020-09 | 30          | 1      |
 | IOQfR02t8dQAY | yRQ5GR19b4QtQAQ | 2020-03 | 25          | 7      |
-| IDQfR02t8dQAY | 8lQ5GR1Uh4QtQAF | 2020-10 | 0           | 0      |
 | IaQfR02t8dQAI | hxQ5GR1O24QtQAB | 2020-08 | 108.13      | 2      |
 | qNQfR02t8dQAQ | MsQ5GR1VD4QtQAP | 2020-10 | 500         | 0      |
 | qHQfR02t8dQAQ | 5GQ5GR0Kx4QtQAR | 2020-03 | 1351.71     | 7      |
@@ -10937,7 +10875,6 @@ There are no results to be displayed.
 | ppQfR02t8dQAA | HhQ5GR14o4QtQAI | 2020-09 | 125         | 1      |
 | poQfR02t8dQAA | ckQ5GR1Sn4QtQAF | 2020-09 | 50          | 1      |
 | pnQfR02t8dQAA | QgQ5GR1RQ4QtQAP | 2020-08 | 50          | 2      |
-| pmQfR02t8dQAA | zjQ5GR1Uy4QtQAF | 2020-10 | 0           | 0      |
 | pGQfR02t8dQAQ | mCQ5GR1T44QtQAR | 2020-09 | 250         | 1      |
 | peQfR02t8dQAA | JpQ5GR1RP4QtQAL | 2020-08 | 250         | 2      |
 | pCQfR02t8dQAQ | XgQ5GR14p4QtQAI | 2020-03 | 700         | 7      |
@@ -10947,7 +10884,6 @@ There are no results to be displayed.
 | p8QfR02t8dQAA | yzQ5GR1RQ4QtQAD | 2020-08 | 50          | 2      |
 | p7QfR02t8dQAA | 0lQ5GR1Ui4QtQAF | 2020-10 | 50          | 0      |
 | p6QfR02t8dQAA | AGQ5GR1Ux4QtQAZ | 2020-10 | 25          | 0      |
-| p2QfR02t8dQAA | iDQ5GR1NZ4QtQAT | 2020-10 | 1           | 0      |
 | qOQfR02t8dQAQ | 8NQ5GR1Kh4QtQAR | 2020-06 | 831.03      | 4      |
 | qMQfR02t8dQAQ | 8QQ5GR1Bh4QtQAR | 2020-05 | 50          | 5      |
 | qLQfR02t8dQAQ | TRQ5GR1R44QtQAZ | 2020-08 | 30          | 2      |
@@ -10971,7 +10907,7 @@ There are no results to be displayed.
 | p1QfR02t8dQAA | HsQ5GR0bv4QtQAI | 2020-03 | 100         | 7      |
 | p0QfR02t8dQAA | KBQ5GR1UA4QtQA1 | 2020-10 | 50          | 0      |
 | ozQfR02t8dQAA | 27Q5GR1Ux4QtQAB | 2020-10 | 30          | 0      |
-| HSQfR02t8dQAY | WKQ5GR1PT4QtQA5 | 2020-09 | 79.94       | 1      |
+| HSQfR02t8dQAY | WKQ5GR1PT4QtQA5 | 2020-10 | 79.94       | 0      |
 | qKQfR02t8dQAQ | MqQ5GR1VD4QtQAP | 2020-10 | 250         | 0      |
 | qJQfR02t8dQAQ | b7Q5GR1VD4QtQAH | 2020-10 | 50          | 0      |
 | qIQfR02t8dQAQ | 63Q5GR1Uh4QtQAB | 2020-10 | 50          | 0      |
@@ -10981,7 +10917,6 @@ There are no results to be displayed.
 | pVQfR02t8dQAQ | V2Q5GR1Kg4QtQAJ | 2020-05 | 500         | 5      |
 | pUQfR02t8dQAQ | qsQ5GR0t34QtQAA | 2020-03 | 500         | 7      |
 | pTQfR02t8dQAQ | YIQ5GR1Ux4QtQA3 | 2020-10 | 250         | 0      |
-| pSQfR02t8dQAQ | PaQ5GR1GF4QtQAL | 2020-03 | 0           | 7      |
 | pRQfR02t8dQAQ | 6KQ5GR1R44QtQAV | 2020-08 | 250         | 1      |
 | pQQfR02t8dQAQ | 14Q5GR1Mq4QtQAF | 2020-10 | 50          | 0      |
 | pPQfR02t8dQAQ | FyQ5GR1Ux4QtQAN | 2020-10 | 50          | 0      |
@@ -11032,9 +10967,8 @@ There are no results to be displayed.
 | vMQfR02t8dQAQ | nBQ5GR1Ic4QtQAR | 2020-04 | 1011.65     | 6      |
 | vLQfR02t8dQAQ | bYQ5GR1Ou4QtQAV | 2020-07 | 1412.13     | 2      |
 | vlQfR02t8dQAA | 0EQ5GR1U94QtQAV | 2020-10 | 400         | 0      |
-| vKQfR02t8dQAQ | hTQ5GR1NZ4QtQAT | 2020-08 | 500         | 1      |
+| vKQfR02t8dQAQ | hTQ5GR1NZ4QtQAT | 2020-09 | 500         | 1      |
 | vJQfR02t8dQAQ | 9wQ5GR0p54QtQAE | 2020-03 | 2614.95     | 7      |
-| vGQfR02t8dQAQ | tkQ5GR1R24QtQAB | 2020-08 | 0           | 2      |
 | vFQfR02t8dQAQ | 0hQ5GR1Mp4QtQAB | 2020-06 | 877.13      | 4      |
 | vEQfR02t8dQAQ | xCQ5GR14q4QtQAQ | 2020-03 | 48.92       | 7      |
 | vDQfR02t8dQAQ | nQQ5GR0hc4QtQAQ | 2020-06 | 1106.96     | 4      |
@@ -11047,10 +10981,8 @@ There are no results to be displayed.
 | v4QfR02t8dQAA | lQQ5GR11E4QtQAS | 2020-03 | 50          | 7      |
 | v3QfR02t8dQAA | 9cQ5GR0rg4QtQAA | 2020-07 | 75          | 3      |
 | v2QfR02t8dQAA | weQ5GR1SC4QtQAD | 2020-09 | 50          | 1      |
-| v1QfR02t8dQAA | h1Q5GR10p4QtQAA | 2020-03 | 0           | 7      |
 | v0QfR02t8dQAA | sNQ5GR0bw4QtQAQ | 2020-03 | 250         | 7      |
 | uxQfR02t8dQAA | aSQ5GR1HY4QtQAX | 2020-03 | 250         | 7      |
-| uwQfR02t8dQAA | QlQ5GR1RQ4QtQAP | 2020-08 | 1           | 2      |
 | uqQfR02t8dQAA | SKQ5GR1R24QtQA3 | 2020-08 | 30          | 2      |
 | upQfR02t8dQAA | k4Q5GR1R24QtQAF | 2020-08 | 30          | 2      |
 | vyQfR02t8dQAA | iAQ5GR1Uh4QtQAV | 2020-10 | 30          | 0      |
@@ -11090,7 +11022,6 @@ There are no results to be displayed.
 | DHQfR02t8dQAY | UlQ5GR1EK4QtQAL | 2020-04 | 50          | 6      |
 | DGQfR02t8dQAY | feQ5GR1Mq4QtQAB | 2020-06 | 50          | 4      |
 | DFQfR02t8dQAY | IfQ5GR1Bg4QtQAN | 2020-03 | 50          | 7      |
-| CXQfR02t8dQAY | WKQ5GR1PT4QtQA5 | 2020-09 | 1           | 1      |
 | CWQfR02t8dQAY | XrQ5GR1SZ4QtQAP | 2020-09 | 250         | 1      |
 | CVQfR02t8dQAY | vOQ5GR1SD4QtQAX | 2020-09 | 75          | 1      |
 | DEQfR02t8dQAY | 8bQ5GR1SD4QtQAH | 2020-09 | 1347.07     | 1      |
@@ -11114,8 +11045,6 @@ There are no results to be displayed.
 | CrQfR02t8dQAI | 44Q5GR1Uh4QtQAB | 2020-10 | 125         | 0      |
 | CqQfR02t8dQAI | JGQ5GR0BI4QtQA1 | 2020-03 | 125         | 7      |
 | CpQfR02t8dQAI | QbQ5GR1SZ4QtQAP | 2020-09 | 125         | 1      |
-| CkQfR02t8dQAI | zQQ5GR1R24QtQAR | 2020-08 | 1           | 2      |
-| CjQfR02t8dQAI | 7KQ5GR1TV4QtQAX | 2020-09 | 1           | 0      |
 | CiQfR02t8dQAI | cTQ5GR0bx4QtQAQ | 2020-03 | 800         | 7      |
 | ChQfR02t8dQAI | jYQ5GR1Sn4QtQAV | 2020-09 | 50          | 1      |
 | CgQfR02t8dQAI | 6MQ5GR0zQ4QtQAW | 2020-03 | 50          | 7      |
@@ -11163,7 +11092,6 @@ There are no results to be displayed.
 | w7QfR02t8dQAE | mQQ5GR1PV4QtQAX | 2020-08 | 500         | 2      |
 | w6QfR02t8dQAE | QvQ5GR1SD4QtQAP | 2020-09 | 250         | 1      |
 | w5QfR02t8dQAE | 1NQ5GR1Bf4QtQAR | 2020-03 | 125         | 7      |
-| w3QfR02t8dQAE | I3Q5GR1Nc4QtQAJ | 2020-07 | 1           | 3      |
 | w2QfR02t8dQAE | G8Q5GR1D94QtQAN | 2020-08 | 50          | 1      |
 | w1QfR02t8dQAE | HwQ5GR1SC4QtQAL | 2020-09 | 30          | 1      |
 | w0QfR02t8dQAE | W5Q5GR1Kg4QtQAJ | 2020-08 | 25          | 2      |
@@ -11194,7 +11122,6 @@ There are no results to be displayed.
 | vUQfR02t8dQAU | rfQ5GR1PV4QtQAD | 2020-08 | 888.78      | 1      |
 | vuQfR02t8dQAE | QwQ5GR1Ms4QtQAN | 2020-07 | 250         | 3      |
 | vTQfR02t8dQAU | JaQ5GR1S94QtQAJ | 2020-09 | 150         | 1      |
-| vtQfR02t8dQAE | yoQ5GR1Ke4QtQAF | 2020-06 | 0           | 4      |
 | vSQfR02t8dQAU | gXQ5GR1El4QtQAR | 2020-03 | 250         | 7      |
 | vsQfR02t8dQAE | eCQ5GR1Mq4QtQAV | 2020-06 | 50          | 3      |
 | vRQfR02t8dQAU | n3Q5GR1TV4QtQAH | 2020-10 | 125         | 0      |
@@ -11203,7 +11130,6 @@ There are no results to be displayed.
 | vNQfR02t8dQAU | duQ5GR1L64QtQAB | 2020-06 | 30          | 4      |
 | vMQfR02t8dQAU | AjQ5GR1SD4QtQAP | 2020-09 | 25          | 1      |
 | vgQfR02t8dQAE | 4dQ5GR1Ke4QtQAF | 2020-05 | 75          | 5      |
-| vdQfR02t8dQAE | P6Q5GR1R24QtQAN | 2020-08 | 1           | 2      |
 | vaQfR02t8dQAE | h8Q5GR1L74QtQAB | 2020-06 | 50          | 4      |
 | wRQfR02t8dQAU | kJQ5GR1L64QtQAV | 2020-06 | 50          | 4      |
 | wQQfR02t8dQAU | o7Q5GR1TR4QtQAH | 2020-10 | 500         | 0      |
@@ -11252,7 +11178,6 @@ There are no results to be displayed.
 | M8QfR02t8dQAM | sFQ5GR0mU4QtQAW | 2020-03 | 36.69       | 7      |
 | M7QfR02t8dQAM | ZYQ5GR17F4QtQA4 | 2020-03 | 50          | 7      |
 | M6QfR02t8dQAM | moQ5GR1NY4QtQAD | 2020-07 | 1013.55     | 3      |
-| M5QfR02t8dQAM | HPQ5GR1Ou4QtQAZ | 2020-07 | 1           | 3      |
 | M4QfR02t8dQAM | nXQ5GR1Mr4QtQAV | 2020-07 | 75          | 3      |
 | M3QfR02t8dQAM | 17Q5GR07s4QtQAE | 2020-03 | 780.61      | 7      |
 | M2QfR02t8dQAM | EdQ5GR0o64QtQAM | 2020-10 | 50          | 0      |
@@ -11301,8 +11226,8 @@ There are no results to be displayed.
 | KTQfR02t8dQA2 | C8Q5GR1R34QtQAN | 2020-08 | 598.19      | 1      |
 | KsQfR02t8dQAM | xiQ5GR06N4QtQAC | 2020-03 | 4799.03     | 7      |
 | KSQfR02t8dQA2 | KVQ5GR1R24QtQA3 | 2020-08 | 706.4       | 1      |
-| KrQfR02t8dQAM | hTQ5GR1NZ4QtQAT | 2020-08 | 628.21      | 1      |
-| KRQfR02t8dQA2 | WKQ5GR1PT4QtQA5 | 2020-09 | 396.27      | 0      |
+| KrQfR02t8dQAM | hTQ5GR1NZ4QtQAT | 2020-09 | 628.21      | 0      |
+| KRQfR02t8dQA2 | WKQ5GR1PT4QtQA5 | 2020-10 | 396.27      | 0      |
 | KqQfR02t8dQAM | 7AQ5GR0bx4QtQAU | 2020-02 | 200.11      | 7      |
 | KQQfR02t8dQA2 | dBQ5GR0bv4QtQAU | 2020-03 | 295.33      | 7      |
 | KpQfR02t8dQAM | 1hQ5GR0eA4QtQAG | 2020-02 | 300.29      | 7      |
@@ -11343,7 +11268,6 @@ There are no results to be displayed.
 | K6QfR02t8dQAM | jKQ5GR0Pp4QtQAV | 2020-02 | 513.5       | 7      |
 | K5QfR02t8dQAM | 8NQ5GR1Kh4QtQAR | 2020-06 | 437.97      | 4      |
 | M9QfR02t8dQAM | 6dQ5GR1L44QtQAF | 2020-10 | 125         | 0      |
-| LZQfR02t8dQA2 | OjQ5GR1UA4QtQAL | 2020-10 | 1           | 0      |
 | LwQfR02t8dQAM | FVQ5GR15j4QtQA2 | 2020-03 | 75          | 7      |
 | LvQfR02t8dQAM | X7Q5GR1KG4QtQAP | 2020-05 | 250         | 4      |
 | LuQfR02t8dQAM | y3Q5GR1KF4QtQAH | 2020-05 | 50          | 5      |
@@ -11367,7 +11291,6 @@ There are no results to be displayed.
 | LDQfR02t8dQA2 | moQ5GR1NY4QtQAD | 2020-07 | 2011.61     | 2      |
 | LcQfR02t8dQAM | 4rQ5GR11h4QtQAE | 2020-10 | 50          | 0      |
 | LbQfR02t8dQAM | 10Q5GR0V04QtQAB | 2020-02 | 14829.5     | 7      |
-| LaQfR02t8dQAM | 10Q5GR0V04QtQAB | 2020-02 | 0           | 7      |
 | i3QfR02t8dQAE | xqQ5GR06N4QtQAC | 2020-03 | 125         | 7      |
 | i2QfR02t8dQAE | RCQ5GR0KB4QtQA1 | 2020-03 | 125         | 6      |
 | i1QfR02t8dQAE | WkQ5GR1T34QtQAN | 2020-10 | 500         | 0      |
@@ -11375,27 +11298,16 @@ There are no results to be displayed.
 | hzQfR02t8dQAE | 3eQ5GR1Ov4QtQAF | 2020-08 | 300         | 2      |
 | hyQfR02t8dQAE | 0XQ5GR1Ov4QtQAV | 2020-08 | 30          | 2      |
 | hxQfR02t8dQAE | AUQ5GR1L74QtQA3 | 2020-08 | 998.75      | 2      |
-| hwQfR02t8dQAE | 1NQ5GR1O34QtQAV | 2020-08 | 0           | 1      |
 | hvQfR02t8dQAE | 4UQ5GR1Ke4QtQAR | 2020-05 | 5050        | 5      |
 | huQfR02t8dQAE | mNQ5GR12D4QtQAW | 2020-03 | 50          | 7      |
-| htQfR02t8dQAE | YQQ5GR12C4QtQA0 | 2020-03 | 0           | 7      |
 | hSQfR02t8dQAU | DPQ5GR1T64QtQA3 | 2020-10 | 50          | 0      |
-| hsQfR02t8dQAE | YQQ5GR12C4QtQA0 | 2020-03 | 0           | 7      |
 | hRQfR02t8dQAU | x1Q5GR06N4QtQAC | 2020-08 | 250         | 2      |
 | hrQfR02t8dQAE | YQQ5GR12C4QtQA0 | 2020-03 | 250         | 7      |
 | hQQfR02t8dQAU | KmQ5GR1TT4QtQAL | 2020-10 | 975         | 0      |
-| hqQfR02t8dQAE | n7Q5GR0t34QtQAA | 2020-03 | 0           | 6      |
-| hPQfR02t8dQAU | wqQ5GR1PS4QtQAD | 2020-08 | 0           | 2      |
-| hpQfR02t8dQAE | n7Q5GR0t34QtQAA | 2020-03 | 0           | 6      |
 | hOQfR02t8dQAU | 3eQ5GR1Ov4QtQAF | 2020-08 | 300         | 2      |
 | hoQfR02t8dQAE | w0Q5GR0o64QtQAE | 2020-03 | 1946.99     | 7      |
-| hNQfR02t8dQAU | 1NQ5GR1O34QtQAV | 2020-08 | 0           | 1      |
 | hMQfR02t8dQAU | 1NQ5GR1O34QtQAV | 2020-08 | 125         | 1      |
-| hLQfR02t8dQAU | XLQ5GR1L64QtQA3 | 2020-06 | 0           | 4      |
-| hKQfR02t8dQAU | XLQ5GR1L64QtQA3 | 2020-06 | 0           | 4      |
-| hJQfR02t8dQAU | XLQ5GR1L64QtQA3 | 2020-06 | 0           | 4      |
 | hIQfR02t8dQAU | AvQ5GR1L44QtQAJ | 2020-06 | 1823.39     | 4      |
-| hHQfR02t8dQAU | AvQ5GR1L44QtQAJ | 2020-06 | 0           | 4      |
 | hGQfR02t8dQAU | 60Q5GR1IH4QtQAD | 2020-03 | 1444.63     | 6      |
 | hFQfR02t8dQAU | qsQ5GR1II4QtQAD | 2020-05 | 50          | 4      |
 | hEQfR02t8dQAU | K5Q5GR1H04QtQAN | 2020-03 | 250         | 7      |
@@ -11445,7 +11357,6 @@ There are no results to be displayed.
 | gTQfR02t8dQAU | UVQ5GR1Rh4QtQA3 | 2020-09 | 5           | 1      |
 | gbQfR02t8dQAE | 0pQ5GR0Kx4QtQAB | 2020-03 | 814.16      | 7      |
 | gaQfR02t8dQAE | xOQ5GR0rg4QtQAU | 2020-03 | 1819.22     | 7      |
-| hjQfR02t8dQAE | HKQ5GR1Ou4QtQAZ | 2020-07 | 1           | 3      |
 | hiQfR02t8dQAE | wQQ5GR1Rj4QtQAR | 2020-09 | 25          | 1      |
 | h0QfR02t8dQAE | kNQ5GR1U94QtQAV | 2020-10 | 25          | 0      |
 | ghQfR02t8dQAE | KoQ5GR0Di4QtQAN | 2020-03 | 150         | 7      |
@@ -11514,9 +11425,7 @@ There are no results to be displayed.
 | 0KQfR02t8dQAU | pIQ5GR0dO4QtQAS | 2020-09 | 250         | 0      |
 | 0hQfR02t8dQAE | IHQ5GR1TU4QtQA1 | 2020-09 | 250         | 0      |
 | 0gQfR02t8dQAE | 3UQ5GR1IK4QtQAX | 2020-03 | 32.5        | 6      |
-| 06QfR02t8dQAE | hTQ5GR1NZ4QtQAT | 2020-08 | 1           | 0      |
 | zzQfR02t8dQAE | vCQ5GR1SC4QtQAT | 2020-09 | 25          | 0      |
-| 1CQfR02t8dQAU | 2ZQ5GR1O34QtQAR | 2020-07 | 0           | 2      |
 | 1AQfR02t8dQAU | 9qQ5GR1TT4QtQAD | 2020-09 | 30          | 0      |
 | 13QfR02t8dQAE | joQ5GR1TT4QtQAD | 2020-09 | 50          | 0      |
 | 12QfR02t8dQAE | 1AQ5GR1Rh4QtQAV | 2020-09 | 125         | 0      |
@@ -11584,7 +11493,6 @@ There are no results to be displayed.
 | 5lQfR02t8dQAE | cxQ5GR1Mr4QtQAF | 2020-06 | 250         | 3      |
 | 5KQfR02t8dQAU | 9PQ5GR1Mr4QtQAV | 2020-06 | 250         | 3      |
 | 5kQfR02t8dQAE | LoQ5GR1Mq4QtQAN | 2020-06 | 250         | 3      |
-| 5eQfR02t8dQAE | PkQ5GR1Rh4QtQAJ | 2020-08 | 1           | 1      |
 | 5bQfR02t8dQAE | lxQ5GR0zQ4QtQAC | 2020-02 | 50          | 7      |
 | 5AQfR02t8dQAU | yOQ5GR1Mr4QtQAV | 2020-06 | 1100        | 2      |
 | 59QfR02t8dQAE | 2AQ5GR0zQ4QtQAS | 2020-02 | 50          | 7      |
@@ -11632,7 +11540,6 @@ There are no results to be displayed.
 | CnQfR02t8dQAM | jLQ5GR1T54QtQAR | 2020-09 | 300         | 0      |
 | CmQfR02t8dQAM | a5Q5GR1Js4QtQAB | 2020-04 | 500         | 5      |
 | ClQfR02t8dQAM | M1Q5GR1T34QtQAN | 2020-09 | 500         | 0      |
-| CkQfR02t8dQAM | VfQ5GR1T64QtQAN | 2020-09 | 0           | 0      |
 | CjQfR02t8dQAM | L5Q5GR1Js4QtQAN | 2020-04 | 250         | 5      |
 | CiQfR02t8dQAM | d4Q5GR0M74QtQAB | 2020-02 | 250         | 7      |
 | ChQfR02t8dQAM | neQ5GR1RQ4QtQAH | 2020-08 | 125         | 1      |
@@ -11758,7 +11665,6 @@ There are no results to be displayed.
 | BsQfR02t8dQAM | 1bQ5GR07s4QtQAE | 2020-03 | 5675.35     | 6      |
 | BRQfR02t8dQA2 | RzQ5GR1Hu4QtQAJ | 2020-03 | 250         | 6      |
 | BgQfR02t8dQAM | mVQ5GR1L34QtQAR | 2020-05 | 875         | 3      |
-| BGQfR02t8dQA2 | 4pQ5GR1R44QtQAF | 2020-09 | 0           | 0      |
 | BfQfR02t8dQAM | GQQ5GR1Kg4QtQAZ | 2020-05 | 500         | 4      |
 | B3QfR02t8dQAM | bIQ5GR1T34QtQAV | 2020-09 | 25          | 0      |
 | B1QfR02t8dQAM | TLQ5GR1T44QtQAZ | 2020-09 | 50          | 0      |
@@ -11804,7 +11710,7 @@ There are no results to be displayed.
 | BZQfR02t8dQA2 | pZQ5GR17H4QtQAW | 2020-03 | 500         | 6      |
 | ByQfR02t8dQAM | xCQ5GR14q4QtQAQ | 2020-03 | 56.85       | 6      |
 | BYQfR02t8dQA2 | L1Q5GR1Ha4QtQAJ | 2020-03 | 500         | 6      |
-| BXQfR02t8dQA2 | tkQ5GR1R24QtQAB | 2020-08 | 500         | 1      |
+| BXQfR02t8dQA2 | tkQ5GR1R24QtQAB | 2020-09 | 500         | 0      |
 | BrQfR02t8dQAM | 0hQ5GR1Mp4QtQAB | 2020-06 | 902.67      | 3      |
 | BqQfR02t8dQAM | ROQ5GR1Mp4QtQAZ | 2020-06 | 884.3       | 3      |
 | BPQfR02t8dQA2 | UGQ5GR1Sn4QtQAZ | 2020-09 | 250         | 0      |
@@ -11812,7 +11718,6 @@ There are no results to be displayed.
 | BOQfR02t8dQA2 | sNQ5GR0bw4QtQAQ | 2020-03 | 250         | 6      |
 | BnQfR02t8dQAM | XZQ5GR1L34QtQAZ | 2020-07 | 1457.93     | 2      |
 | BmQfR02t8dQAM | nQQ5GR0hc4QtQAQ | 2020-06 | 1266.12     | 3      |
-| BIQfR02t8dQA2 | QlQ5GR1RQ4QtQAP | 2020-08 | 1           | 1      |
 | BHQfR02t8dQA2 | iFQ5GR0hb4QtQAU | 2020-03 | 100         | 6      |
 | BDQfR02t8dQA2 | IEQ5GR1Mp4QtQA3 | 2020-06 | 50          | 3      |
 | BbQfR02t8dQAM | AmQ5GR1SD4QtQAP | 2020-09 | 500         | 0      |
@@ -11868,9 +11773,7 @@ There are no results to be displayed.
 | 3tQfR02t8dQAE | JQQ5GR1Rk4QtQAZ | 2020-09 | 250         | 0      |
 | 3sQfR02t8dQAE | XrQ5GR1SZ4QtQAP | 2020-09 | 250         | 0      |
 | 39QfR02t8dQAE | w6Q5GR1SZ4QtQAH | 2020-09 | 125         | 0      |
-| 38QfR02t8dQAE | WKQ5GR1PT4QtQA5 | 2020-09 | 1           | 0      |
 | 2zQfR02t8dQAE | feQ5GR1Mq4QtQAB | 2020-06 | 50          | 3      |
-| C9QfR02t8dQAM | uPQ5GR1PV4QtQAT | 2020-08 | 0           | 1      |
 | C8QfR02t8dQAM | NEQ5GR1EI4QtQA1 | 2020-05 | 31.45       | 4      |
 | C7QfR02t8dQAM | jYQ5GR1Sn4QtQAV | 2020-09 | 50          | 0      |
 | C6QfR02t8dQAM | t4Q5GR1SD4QtQAH | 2020-09 | 75          | 0      |
@@ -11888,7 +11791,6 @@ There are no results to be displayed.
 | AvQfR02t8dQAM | QbQ5GR1SZ4QtQAP | 2020-09 | 125         | 0      |
 | AuQfR02t8dQAM | 8bQ5GR1SD4QtQAH | 2020-09 | 504.21      | 0      |
 | AsQfR02t8dQAM | zVQ5GR1R24QtQAR | 2020-08 | 50          | 1      |
-| ArQfR02t8dQAM | zQQ5GR1R24QtQAR | 2020-08 | 1           | 1      |
 | AqQfR02t8dQAM | ZHQ5GR1Na4QtQA3 | 2020-07 | 250         | 2      |
 | ApQfR02t8dQAM | gNQ5GR1O14QtQAR | 2020-07 | 480.44      | 2      |
 | AoQfR02t8dQAM | rYQ5GR1II4QtQAT | 2020-04 | 500         | 5      |
@@ -11952,7 +11854,6 @@ There are no results to be displayed.
 | 3lQfR02t8dQAE | mQQ5GR1PV4QtQAX | 2020-08 | 500         | 1      |
 | 3kQfR02t8dQAE | MSQ5GR1H04QtQA3 | 2020-05 | 250         | 4      |
 | 3IQfR02t8dQAU | W5Q5GR1Kg4QtQAJ | 2020-08 | 125         | 1      |
-| 3eQfR02t8dQAE | I3Q5GR1Nc4QtQAJ | 2020-07 | 1           | 2      |
 | 3cQfR02t8dQAE | P1Q5GR1R24QtQAN | 2020-08 | 50          | 1      |
 | qzQfR02t8dQAE | 4IQ5GR1TV4QtQAX | 2020-09 | 100         | 0      |
 | cWQfR02t8dQAU | QBQ5GR15h4QtQAY | 2020-03 | 32.5        | 6      |
@@ -11964,7 +11865,6 @@ There are no results to be displayed.
 | caQfR02t8dQAE | ECQ5GR1L54QtQA3 | 2020-06 | 50          | 3      |
 | c8QfR02t8dQAE | 4dQ5GR1Ke4QtQAF | 2020-05 | 75          | 4      |
 | c0QfR02t8dQAE | duQ5GR1L64QtQAB | 2020-06 | 30          | 3      |
-| bzQfR02t8dQAE | P6Q5GR1R24QtQAN | 2020-08 | 1           | 1      |
 | bYQfR02t8dQAU | EjQ5GR1NY4QtQAL | 2020-07 | 125         | 2      |
 | bwQfR02t8dQAE | JaQ5GR1S94QtQAJ | 2020-09 | 150         | 0      |
 | bvQfR02t8dQAE | AoQ5GR1SD4QtQAP | 2020-09 | 50          | 0      |
@@ -11979,7 +11879,6 @@ There are no results to be displayed.
 | apQfR02t8dQAE | vgQ5GR1R24QtQAB | 2020-08 | 661.06      | 1      |
 | aoQfR02t8dQAE | rZQ5GR1PU4QtQAT | 2020-09 | 125         | 0      |
 | ahQfR02t8dQAE | vOQ5GR1PS4QtQAT | 2020-08 | 475         | 1      |
-| agQfR02t8dQAE | yoQ5GR1Ke4QtQAF | 2020-06 | 0           | 3      |
 | acQfR02t8dQAE | h8Q5GR1L74QtQAB | 2020-06 | 50          | 3      |
 | cZQfR02t8dQAU | LOQ5GR0rg4QtQAY | 2020-03 | 1589.29     | 6      |
 | cYQfR02t8dQAU | YlQ5GR0rX4QtQAK | 2020-03 | 900.84      | 6      |
@@ -12032,7 +11931,7 @@ There are no results to be displayed.
 | bVQfR02t8dQAU | GzQ5GR1Fn4QtQAJ | 2020-03 | 10128.3     | 5      |
 | bUQfR02t8dQAU | YmQ5GR1L64QtQAN | 2020-06 | 548.99      | 2      |
 | buQfR02t8dQAE | 6aQ5GR1An4QtQAB | 2020-05 | 250         | 4      |
-| bTQfR02t8dQAU | hTQ5GR1NZ4QtQAT | 2020-08 | 611.41      | 0      |
+| bTQfR02t8dQAU | hTQ5GR1NZ4QtQAT | 2020-09 | 611.41      | 0      |
 | bsQfR02t8dQAE | cLQ5GR1O24QtQAR | 2020-07 | 3006.51     | 1      |
 | bRQfR02t8dQAU | i1Q5GR11F4QtQAG | 2020-02 | 153.85      | 6      |
 | brQfR02t8dQAE | 1bQ5GR07s4QtQAE | 2020-03 | 3387.2      | 5      |
@@ -12098,7 +11997,6 @@ There are no results to be displayed.
 | B7QfR02t8dQAM | C8Q5GR1PT4QtQAP | 2020-08 | 1061.85     | 0      |
 | B4QfR02t8dQAM | PvQ5GR1Js4QtQAN | 2020-05 | 32.5        | 4      |
 | B2QfR02t8dQAM | UnQ5GR1Kg4QtQAJ | 2020-07 | 125         | 1      |
-| AwQfR02t8dQAM | HPQ5GR1Ou4QtQAZ | 2020-07 | 1           | 2      |
 | AmQfR02t8dQAM | 24Q5GR1O14QtQAB | 2020-08 | 974.28      | 0      |
 | AjQfR02t8dQAM | LDQ5GR1Mp4QtQA3 | 2020-07 | 500         | 2      |
 | rTQfR02t8dQAU | zVQ5GR1R44QtQAR | 2020-08 | 100         | 0      |
@@ -12186,7 +12084,6 @@ There are no results to be displayed.
 | 55QfR02t8dQAE | KoQ5GR0Di4QtQAN | 2020-03 | 150         | 6      |
 | 50QfR02t8dQAE | 9tQ5GR1Rh4QtQAF | 2020-09 | 125         | 0      |
 | 4sQfR02t8dQAE | wQQ5GR1Rj4QtQAR | 2020-09 | 25          | 0      |
-| 4jQfR02t8dQAE | HKQ5GR1Ou4QtQAZ | 2020-07 | 1           | 2      |
 | 4cQfR02t8dQAE | I6Q5GR1Mq4QtQAJ | 2020-06 | 30          | 2      |
 | 5PQfR02t8dQAU | H3Q5GR1L34QtQAJ | 2020-06 | 796.48      | 3      |
 | 5KQfR02t8dQAU | PyQ5GR1Rh4QtQAN | 2020-08 | 250         | 0      |
@@ -12198,7 +12095,6 @@ There are no results to be displayed.
 | 57QfR02t8dQAE | xqQ5GR06N4QtQAC | 2020-03 | 250         | 6      |
 | 56QfR02t8dQAE | YWQ5GR1L64QtQA3 | 2020-06 | 500         | 2      |
 | 53QfR02t8dQAE | voQ5GR06N4QtQAC | 2020-03 | 500         | 6      |
-| 52QfR02t8dQAE | UZQ5GR0Iu4QtQAZ | 2020-03 | 0           | 6      |
 | 4zQfR02t8dQAE | 42Q5GR1IK4QtQAH | 2020-03 | 32.5        | 5      |
 | 4xQfR02t8dQAE | P7Q5GR1Js4QtQAN | 2020-05 | 81.25       | 4      |
 | 4vQfR02t8dQAE | wEQ5GR0OD4QtQAX | 2020-03 | 500         | 5      |
@@ -12223,7 +12119,6 @@ There are no results to be displayed.
 | ljQfR02t8dQAA | RcQ5GR0eC4QtQAO | 2020-03 | 127.74      | 5      |
 | liQfR02t8dQAA | TcQ5GR1En4QtQAJ | 2020-03 | 500         | 5      |
 | lhQfR02t8dQAA | tEQ5GR0ks4QtQAQ | 2020-02 | 50          | 6      |
-| lgQfR02t8dQAA | hTQ5GR1NZ4QtQAT | 2020-08 | 1           | 0      |
 | AZQfR02t8dQAY | mvQ5GR1Iz4QtQAF | 2020-04 | 81.25       | 4      |
 | AYQfR02t8dQAY | oJQ5GR1O34QtQAV | 2020-07 | 25          | 1      |
 | AsQfR02t8dQAI | 5LQ5GR1Bg4QtQAR | 2020-02 | 1956.21     | 6      |
@@ -12307,7 +12202,6 @@ There are no results to be displayed.
 | zhQfR02t8dQAA | cxQ5GR1Mr4QtQAF | 2020-06 | 250         | 2      |
 | zFQfR02t8dQAQ | uCQ5GR1Mr4QtQAV | 2020-06 | 50          | 2      |
 | zeQfR02t8dQAA | RcQ5GR0p44QtQAI | 2020-02 | 1152.82     | 6      |
-| zBQfR02t8dQAQ | PkQ5GR1Rh4QtQAJ | 2020-08 | 1           | 0      |
 | zbQfR02t8dQAA | JUQ5GR0M54QtQAZ | 2020-02 | 50          | 6      |
 | zwQfR02t8dQAA | fdQ5GR14s4QtQAA | 2020-02 | 1352.11     | 6      |
 | zvQfR02t8dQAA | EkQ5GR1Mq4QtQAJ | 2020-06 | 250         | 2      |
@@ -12324,7 +12218,6 @@ There are no results to be displayed.
 | zDQfR02t8dQAQ | QNQ5GR1O24QtQAZ | 2020-07 | 150         | 1      |
 | zaQfR02t8dQAA | iUQ5GR1L34QtQAR | 2020-05 | 30          | 3      |
 | zZQfR02t8dQAQ | cLQ5GR1O24QtQAR | 2020-07 | 1563.02     | 1      |
-| zYQfR02t8dQAQ | QJQ5GR1Rh4QtQAZ | 2020-08 | 1           | 0      |
 | zVQfR02t8dQAQ | TSQ5GR1R44QtQAZ | 2020-08 | 300         | 0      |
 | zTQfR02t8dQAQ | jKQ5GR0Pp4QtQAV | 2020-02 | 1296.9      | 6      |
 | zSQfR02t8dQAQ | a5Q5GR1Js4QtQAB | 2020-04 | 500         | 4      |
@@ -12353,7 +12246,6 @@ There are no results to be displayed.
 | DoQfR05h8dQAI | CrQ5GR0jd4QtQAI | 2020-03 | 250         | 5      |
 | DLQfR05h8dQAY | GvQ5GR1Be4QtQAN | 2020-02 | 49.11       | 6      |
 | DkQfR05h8dQAI | yIQ5GR1Bg4QtQAR | 2020-02 | 250         | 6      |
-| DJQfR05h8dQAY | J9Q5GR1Ao4QtQAN | 2020-03 | 0.87        | 5      |
 | DjQfR05h8dQAI | QKQ5GR1244QtQAY | 2020-03 | 25          | 5      |
 | DhQfR05h8dQAI | D8Q5GR1Mq4QtQAJ | 2020-07 | 50          | 1      |
 | DGQfR05h8dQAY | bCQ5GR1Be4QtQAV | 2020-03 | 159.82      | 5      |
@@ -12464,14 +12356,12 @@ There are no results to be displayed.
 | DZQfR05h8dQAY | hkQ5GR1O24QtQAB | 2020-07 | 525         | 0      |
 | DyQfR05h8dQAI | SKQ5GR1R24QtQA3 | 2020-08 | 30          | 0      |
 | DXQfR05h8dQAY | 0hQ5GR1Mp4QtQAB | 2020-06 | 250         | 2      |
-| DNQfR05h8dQAY | QlQ5GR1RQ4QtQAP | 2020-08 | 1           | 0      |
 | DEQfR05h8dQAY | xCQ5GR14q4QtQAQ | 2020-03 | 55.08       | 5      |
 | DCQfR05h8dQAY | iFQ5GR0hb4QtQAU | 2020-03 | 100         | 5      |
 | DcQfR05h8dQAI | aSQ5GR1HY4QtQAX | 2020-03 | 250         | 5      |
 | D6QfR05h8dQAI | Q8Q5GR1R24QtQAJ | 2020-08 | 500         | 0      |
 | CZQfR05h8dQAY | wFQ5GR1O34QtQAV | 2020-08 | 75          | 0      |
 | CYQfR05h8dQAY | h1Q5GR10p4QtQAA | 2020-03 | 250         | 5      |
-| CxQfR05h8dQAI | tkQ5GR1R24QtQAB | 2020-08 | 0           | 0      |
 | CVQfR05h8dQAY | 9cQ5GR0rg4QtQAA | 2020-07 | 75          | 1      |
 | CUQfR05h8dQAY | wnQ5GR06N4QtQAC | 2020-03 | 500         | 5      |
 | CuQfR05h8dQAI | rHQ5GR0mU4QtQAW | 2020-03 | 1913.85     | 5      |
@@ -12522,7 +12412,6 @@ There are no results to be displayed.
 | grQfR05h8dQAA | zVQ5GR1R24QtQAR | 2020-08 | 50          | 0      |
 | glQfR05h8dQAA | msQ5GR1PV4QtQAD | 2020-08 | 30          | 0      |
 | ghQfR05h8dQAA | uPQ5GR1PV4QtQAT | 2020-08 | 150         | 0      |
-| ggQfR05h8dQAA | zQQ5GR1R24QtQAR | 2020-08 | 1           | 0      |
 | gfQfR05h8dQAA | RIQ5GR0rD4QtQA4 | 2020-03 | 250         | 5      |
 | gcQfR05h8dQAA | tWQ5GR1PV4QtQAT | 2020-08 | 30          | 0      |
 | gbQfR05h8dQAA | gNQ5GR1O14QtQAR | 2020-07 | 575.56      | 1      |
@@ -12532,7 +12421,6 @@ There are no results to be displayed.
 | kNQfR05h8dQAQ | qRQ5GR1O24QtQAV | 2020-08 | 250         | 0      |
 | kIQfR05h8dQAQ | UhQ5GR1Iy4QtQAN | 2020-04 | 81.25       | 3      |
 | kgQfR05h8dQAA | ARQ5GR1Na4QtQAZ | 2020-07 | 30          | 1      |
-| kDQfR05h8dQAQ | AvQ5GR1L44QtQAJ | 2020-06 | 0           | 2      |
 | kCQfR05h8dQAQ | ZLQ5GR18t4QtQAY | 2020-03 | 250         | 5      |
 | kcQfR05h8dQAA | ABQ5GR1NY4QtQA1 | 2020-07 | 125         | 1      |
 | k5QfR05h8dQAA | 6iQ5GR1GH4QtQAD | 2020-03 | 500         | 5      |
@@ -12578,9 +12466,7 @@ There are no results to be displayed.
 | jpQfR05h8dQAA | EFQ5GR1NY4QtQA1 | 2020-07 | 125         | 1      |
 | jjQfR05h8dQAA | hXQ5GR1L64QtQAR | 2020-06 | 30          | 2      |
 | jfQfR05h8dQAA | MSQ5GR1H04QtQA3 | 2020-05 | 250         | 3      |
-| jcQfR05h8dQAA | I3Q5GR1Nc4QtQAJ | 2020-07 | 1           | 1      |
 | jbQfR05h8dQAA | s1Q5GR0zR4QtQAG | 2020-03 | 250         | 5      |
-| kZQfR05h8dQAQ | P6Q5GR1R24QtQAN | 2020-08 | 1           | 0      |
 | kUQfR05h8dQAQ | QwQ5GR1Ms4QtQAN | 2020-07 | 100         | 1      |
 | kRQfR05h8dQAQ | 4dQ5GR1Ke4QtQAF | 2020-05 | 75          | 3      |
 | kQQfR05h8dQAQ | yoQ5GR1Ke4QtQAF | 2020-06 | 50          | 2      |
@@ -12662,7 +12548,6 @@ There are no results to be displayed.
 | qQQfR05h8dQAQ | DTQ5GR1L54QtQA3 | 2020-06 | 305.52      | 2      |
 | qqQfR05h8dQAA | GzQ5GR1Fn4QtQAJ | 2020-03 | 153.67      | 4      |
 | qPQfR05h8dQAQ | 7eQ5GR1KH4QtQAD | 2020-07 | 229.09      | 1      |
-| qpQfR05h8dQAA | HPQ5GR1Ou4QtQAZ | 2020-07 | 1           | 1      |
 | qMQfR05h8dQAQ | AwQ5GR15j4QtQAI | 2020-04 | 473.26      | 4      |
 | qmQfR05h8dQAA | cLQ5GR1O24QtQAR | 2020-07 | 38.3        | 0      |
 | qLQfR05h8dQAQ | LDQ5GR1Mp4QtQA3 | 2020-07 | 500         | 1      |
@@ -12688,7 +12573,6 @@ There are no results to be displayed.
 | q5QfR05h8dQAA | f6Q5GR1J04QtQAF | 2020-04 | 1600.33     | 3      |
 | q4QfR05h8dQAA | AvQ5GR1L44QtQAJ | 2020-06 | 1000.28     | 2      |
 | q3QfR05h8dQAA | FLQ5GR1NZ4QtQA1 | 2020-08 | 666.09      | 0      |
-| q2QfR05h8dQAA | 7yQ5GR1EJ4QtQAH | 2020-03 | 0           | 5      |
 | q0QfR05h8dQAA | LzQ5GR1Kh4QtQAN | 2020-06 | 104.1       | 2      |
 | pzQfR05h8dQAA | ctQ5GR11H4QtQAC | 2020-02 | 189.52      | 5      |
 | pyQfR05h8dQAA | PMQ5GR1NY4QtQA1 | 2020-07 | 30          | 1      |
@@ -12713,7 +12597,6 @@ There are no results to be displayed.
 | vfQfR05h8dQAA | REQ5GR1Am4QtQAZ | 2020-03 | 140.31      | 5      |
 | vEQfR05h8dQAQ | iIQ5GR1EI4QtQAT | 2020-03 | 50          | 5      |
 | vDQfR05h8dQAQ | R3Q5GR1NY4QtQAL | 2020-07 | 300         | 0      |
-| vcQfR05h8dQAA | HPQ5GR1Ou4QtQAZ | 2020-07 | 1           | 1      |
 | vbQfR05h8dQAA | 1NQ5GR1O34QtQAV | 2020-08 | 125         | 0      |
 | vAQfR05h8dQAQ | yAQ5GR1Ou4QtQAV | 2020-08 | 150         | 0      |
 | vaQfR05h8dQAA | REQ5GR12C4QtQA0 | 2020-03 | 1065.34     | 5      |
@@ -12771,11 +12654,9 @@ There are no results to be displayed.
 | WiQfR05h8dQAI | PSQ5GR1EI4QtQA5 | 2020-03 | 250         | 5      |
 | WeQfR05h8dQAI | weQ5GR1Ou4QtQAF | 2020-08 | 30          | 0      |
 | WdQfR05h8dQAI | xcQ5GR06N4QtQAC | 2020-03 | 5313.31     | 5      |
-| XXQfR05h8dQAY | KSQ5GR13k4QtQA2 | 2020-03 | 0           | 5      |
 | XLQfR05h8dQAY | 7cQ5GR1L54QtQAB | 2020-06 | 30          | 2      |
 | XJQfR05h8dQAY | KoQ5GR0Di4QtQAN | 2020-03 | 150         | 5      |
 | WzQfR05h8dQAI | gnQ5GR1NY4QtQAD | 2020-07 | 500         | 1      |
-| WcQfR05h8dQAI | HKQ5GR1Ou4QtQAZ | 2020-07 | 1           | 1      |
 | XUQfR05h8dQAY | DTQ5GR1L54QtQA3 | 2020-06 | 2073.94     | 2      |
 | XPQfR05h8dQAY | YWQ5GR1L64QtQA3 | 2020-06 | 500         | 1      |
 | XGQfR05h8dQAY | P7Q5GR1Js4QtQAN | 2020-05 | 81.25       | 3      |
@@ -12849,7 +12730,6 @@ There are no results to be displayed.
 | u9QfR05h8dQAA | KhQ5GR0zR4QtQAO | 2020-02 | 799.19      | 5      |
 | u5QfR05h8dQAA | ytQ5GR1D84QtQAB | 2020-02 | 250         | 5      |
 | u0QfR05h8dQAA | vsQ5GR1KF4QtQAH | 2020-04 | 250         | 3      |
-| tzQfR05h8dQAA | eCQ5GR1Mq4QtQAV | 2020-06 | 0           | 1      |
 | txQfR05h8dQAA | 14Q5GR1GI4QtQAD | 2020-02 | 2656.05     | 5      |
 | tuQfR05h8dQAA | ctQ5GR11H4QtQAC | 2020-02 | 825.45      | 5      |
 | ttQfR05h8dQAA | iPQ5GR0Uw4QtQAR | 2020-02 | 831.26      | 5      |
@@ -12974,7 +12854,6 @@ There are no results to be displayed.
 | AjQfR05h8dQAI | nUQ5GR1EK4QtQAT | 2020-03 | 981.38      | 4      |
 | AiQfR05h8dQAI | u8Q5GR1Fo4QtQAB | 2020-03 | 861.02      | 4      |
 | AhQfR05h8dQAI | 3RQ5GR1O14QtQAR | 2020-07 | 125         | 0      |
-| CEQfR05h8dQA2 | nBQ5GR1Ic4QtQAR | 2020-04 | 0           | 3      |
 | CDQfR05h8dQA2 | RzQ5GR1Hu4QtQAJ | 2020-03 | 989.95      | 4      |
 | C8QfR05h8dQAM | KkQ5GR0hc4QtQAM | 2020-03 | 1252.06     | 4      |
 | C2QfR05h8dQAM | LSQ5GR1Mp4QtQA3 | 2020-07 | 250         | 0      |
@@ -13009,7 +12888,6 @@ There are no results to be displayed.
 | CMQfR05h8dQA2 | sNQ5GR0bw4QtQAQ | 2020-03 | 100         | 4      |
 | CLQfR05h8dQA2 | nQQ5GR0hc4QtQAQ | 2020-06 | 1684.16     | 1      |
 | CKQfR05h8dQA2 | eSQ5GR1Mr4QtQAV | 2020-07 | 500         | 0      |
-| CIQfR05h8dQA2 | J2Q5GR1Mp4QtQAN | 2020-06 | 0           | 1      |
 | CFQfR05h8dQA2 | L1Q5GR1Ha4QtQAJ | 2020-03 | 250         | 4      |
 | CCQfR05h8dQA2 | lQQ5GR11E4QtQAS | 2020-03 | 50          | 4      |
 | CAQfR05h8dQA2 | rHQ5GR0mU4QtQAW | 2020-03 | 1819.41     | 4      |
@@ -13112,10 +12990,8 @@ There are no results to be displayed.
 | UMQfR05h8dQA2 | CQQ5GR1Gz4QtQAZ | 2020-03 | 250         | 4      |
 | UKQfR05h8dQA2 | PGQ5GR1En4QtQAZ | 2020-03 | 250         | 4      |
 | UJQfR05h8dQA2 | 8mQ5GR1Nb4QtQAB | 2020-07 | 50          | 0      |
-| UbQfR05h8dQAM | XtQ5GR1L34QtQAJ | 2020-05 | 0           | 1      |
 | UAQfR05h8dQA2 | eEQ5GR1L64QtQAR | 2020-06 | 75          | 1      |
 | U6QfR05h8dQAM | aoQ5GR18t4QtQAA | 2020-03 | 50          | 4      |
-| U3QfR05h8dQAM | I3Q5GR1Nc4QtQAJ | 2020-07 | 1           | 0      |
 | U0QfR05h8dQAM | SIQ5GR15k4QtQAY | 2020-03 | 250         | 4      |
 | TxQfR05h8dQAM | EFQ5GR1NY4QtQA1 | 2020-07 | 125         | 0      |
 | TwQfR05h8dQAM | s1Q5GR0zR4QtQAG | 2020-03 | 250         | 4      |
@@ -13151,7 +13027,6 @@ There are no results to be displayed.
 | eEQfR05h8dQAU | 5AQ5GR0bx4QtQAU | 2020-03 | 250         | 4      |
 | eDQfR05h8dQAU | nUQ5GR1EK4QtQAT | 2020-03 | 125         | 3      |
 | eAQfR05h8dQAU | X3Q5GR0Jo4QtQAN | 2020-03 | 50          | 4      |
-| e5QfR05h8dQAE | p6Q5GR0BF4QtQAH | 2020-03 | 0           | 4      |
 | dWQfR05h8dQAU | EQQ5GR0NP4QtQA5 | 2020-03 | 1331.78     | 4      |
 | dVQfR05h8dQAU | KaQ5GR0zR4QtQAO | 2020-03 | 50          | 4      |
 | dvQfR05h8dQAE | LQQ5GR0zQ4QtQA0 | 2020-03 | 175         | 4      |
@@ -13235,7 +13110,6 @@ There are no results to be displayed.
 | vQQfR05h8dQAU | skQ5GR1Am4QtQAB | 2020-03 | 167.75      | 4      |
 | vPQfR05h8dQAU | 5cQ5GR1An4QtQAB | 2020-03 | 50          | 4      |
 | vbQfR05h8dQAE | SoQ5GR1KH4QtQAL | 2020-05 | 150         | 2      |
-| fRQfR05h8dQAQ | HPQ5GR1Ou4QtQAZ | 2020-07 | 1           | 0      |
 | wFQfR05h8dQAU | n7Q5GR0t34QtQAA | 2020-03 | 250         | 3      |
 | wfQfR05h8dQAE | IiQ5GR1H04QtQAN | 2020-03 | 250         | 4      |
 | wdQfR05h8dQAE | 7JQ5GR1Ha4QtQAV | 2020-05 | 50          | 2      |
@@ -13266,7 +13140,6 @@ There are no results to be displayed.
 | wLQfR05h8dQAU | xOQ5GR0rg4QtQAU | 2020-03 | 3818.11     | 4      |
 | wCQfR05h8dQAU | U3Q5GR12D4QtQAK | 2020-03 | 429.45      | 4      |
 | wBQfR05h8dQAU | bTQ5GR19Y4QtQAW | 2020-03 | 50          | 4      |
-| w6QfR05h8dQAE | Q1Q5GR15h4QtQAI | 2020-03 | 0           | 4      |
 | w3QfR05h8dQAE | ghQ5GR12D4QtQAC | 2020-03 | 905.29      | 4      |
 | vxQfR05h8dQAE | UJQ5GR0t54QtQAY | 2020-03 | 500         | 4      |
 | vvQfR05h8dQAE | xcQ5GR06N4QtQAC | 2020-03 | 3906.86     | 4      |
@@ -13297,7 +13170,6 @@ There are no results to be displayed.
 | voQfR05h8dQAE | P7Q5GR1Js4QtQAN | 2020-05 | 81.25       | 2      |
 | vnQfR05h8dQAE | H3Q5GR1L34QtQAJ | 2020-06 | 518.58      | 1      |
 | vaQfR05h8dQAE | O4Q5GR1254QtQAM | 2020-03 | 400         | 4      |
-| fQQfR05h8dQAQ | HKQ5GR1Ou4QtQAZ | 2020-07 | 1           | 0      |
 | vZQfR05h8dQAU | yOQ5GR1Mr4QtQAV | 2020-06 | 700         | 0      |
 | vYQfR05h8dQAU | aLQ5GR1Hv4QtQAV | 2020-03 | 81.25       | 3      |
 | vXQfR05h8dQAU | y4Q5GR1KF4QtQAH | 2020-04 | 250         | 2      |
@@ -13448,7 +13320,6 @@ There are no results to be displayed.
 | Z1QfR05h8dQAM | IyQ5GR1254QtQAM | 2020-03 | 50          | 3      |
 | YwQfR05h8dQAM | 8QQ5GR1Bh4QtQAR | 2020-05 | 50          | 1      |
 | YuQfR05h8dQAM | vzQ5GR06N4QtQAC | 2020-03 | 299         | 3      |
-| YsQfR05h8dQAM | AYQ5GR19Z4QtQA4 | 2020-03 | 0           | 3      |
 | YRQfR05h8dQA2 | CPQ5GR1JR4QtQA5 | 2020-04 | 50          | 2      |
 | YQQfR05h8dQA2 | nUQ5GR1EK4QtQAT | 2020-03 | 1038.56     | 3      |
 | YLQfR05h8dQA2 | HsQ5GR0bv4QtQAI | 2020-03 | 100         | 3      |
@@ -13494,7 +13365,6 @@ There are no results to be displayed.
 | uEQfR05h8dQAU | 9wQ5GR0p54QtQAE | 2020-03 | 1271.91     | 3      |
 | uCQfR05h8dQAU | IEQ5GR1Mp4QtQA3 | 2020-06 | 50          | 0      |
 | uAQfR05h8dQAU | h1Q5GR10p4QtQAA | 2020-03 | 250         | 3      |
-| u9QfR05h8dQAE | J2Q5GR1Mp4QtQAN | 2020-06 | 0           | 0      |
 | u8QfR05h8dQAE | nBQ5GR1Ic4QtQAR | 2020-04 | 250         | 2      |
 | u7QfR05h8dQAE | nUQ5GR1EK4QtQAT | 2020-03 | 125         | 2      |
 | u6QfR05h8dQAE | iFQ5GR0hb4QtQAU | 2020-03 | 100         | 3      |
@@ -13507,7 +13377,6 @@ There are no results to be displayed.
 | trQfR05h8dQAE | aSQ5GR1HY4QtQAX | 2020-03 | 250         | 3      |
 | tmQfR05h8dQAE | RCQ5GR0KB4QtQA1 | 2020-03 | 125         | 2      |
 | tkQfR05h8dQAE | lQQ5GR11E4QtQAS | 2020-03 | 50          | 3      |
-| tiQfR05h8dQAE | J2Q5GR1Mp4QtQAN | 2020-06 | 0           | 0      |
 | tcQfR05h8dQAE | xqQ5GR06N4QtQAC | 2020-03 | 125         | 3      |
 | taQfR05h8dQAE | xCQ5GR14q4QtQAQ | 2020-03 | 47.11       | 3      |
 | uQQfR05h8dQAU | YRQ5GR0zP4QtQA4 | 2020-03 | 250         | 3      |
@@ -13540,7 +13409,6 @@ There are no results to be displayed.
 | MUQfR05h8dQA2 | 5KQ5GR13l4QtQAQ | 2020-03 | 25          | 3      |
 | MpQfR05h8dQAM | JGQ5GR0BI4QtQA1 | 2020-03 | 125         | 3      |
 | MnQfR05h8dQAM | rYQ5GR1II4QtQAT | 2020-04 | 500         | 2      |
-| MmQfR05h8dQAM | ijQ5GR1Iz4QtQAF | 2020-04 | 0           | 2      |
 | MjQfR05h8dQAM | NEQ5GR1EI4QtQA1 | 2020-05 | 47.65       | 1      |
 | MhQfR05h8dQAM | ufQ5GR0o74QtQAE | 2020-03 | 100         | 3      |
 | MGQfR05h8dQA2 | x7Q5GR06N4QtQAC | 2020-03 | 500         | 3      |
@@ -13590,7 +13458,6 @@ There are no results to be displayed.
 | RRQfR05h8dQA2 | dvQ5GR1L64QtQAB | 2020-06 | 150         | 0      |
 | RQQfR05h8dQA2 | WUQ5GR0p64QtQAY | 2020-03 | 1861.55     | 3      |
 | RpQfR05h8dQAM | IBQ5GR0zQ4QtQA0 | 2020-03 | 50          | 3      |
-| RPQfR05h8dQA2 | NNQ5GR1244QtQAY | 2020-03 | 0           | 3      |
 | RJQfR05h8dQA2 | h8Q5GR1L74QtQAB | 2020-06 | 50          | 0      |
 | RIQfR05h8dQA2 | NnQ5GR1H04QtQAN | 2020-03 | 600         | 3      |
 | ReQfR05h8dQAM | duQ5GR1L64QtQAB | 2020-06 | 30          | 0      |
@@ -13695,7 +13562,6 @@ There are no results to be displayed.
 | XTQfR05h8dQAY | cwQ5GR15j4QtQAE | 2020-03 | 1013.5      | 3      |
 | XhQfR05h8dQAI | XFQ5GR1L64QtQA3 | 2020-06 | 125         | 0      |
 | XfQfR05h8dQAI | M7Q5GR1EI4QtQAL | 2020-03 | 250         | 3      |
-| XBQfR05h8dQAY | 5tQ5GR0bv4QtQAA | 2020-03 | 0           | 3      |
 | XaQfR05h8dQAI | GSQ5GR1H04QtQA3 | 2020-05 | 500         | 1      |
 | X8QfR05h8dQAI | DJQ5GR0WE4QtQA5 | 2020-03 | 500         | 3      |
 | X7QfR05h8dQAI | eKQ5GR1GI4QtQAX | 2020-03 | 250         | 3      |
@@ -13707,7 +13573,6 @@ There are no results to be displayed.
 | WxQfR05h8dQAI | XNQ5GR1KH4QtQA5 | 2020-05 | 50          | 1      |
 | XZQfR05h8dQAY | bTQ5GR19Y4QtQAW | 2020-03 | 50          | 3      |
 | XYQfR05h8dQAY | U3Q5GR12D4QtQAK | 2020-03 | 388.22      | 3      |
-| XXQfR05h8dQAY | Q1Q5GR15h4QtQAI | 2020-03 | 0           | 3      |
 | XUQfR05h8dQAY | rtQ5GR1Hv4QtQAF | 2020-04 | 500         | 2      |
 | XQQfR05h8dQAY | xcQ5GR06N4QtQAC | 2020-03 | 2537.96     | 3      |
 | XPQfR05h8dQAY | VQQ5GR12D4QtQA0 | 2020-03 | 277.29      | 3      |
@@ -13854,8 +13719,6 @@ There are no results to be displayed.
 | 3cQfR05g8dQAA | LGQ5GR1Ao4QtQA3 | 2020-03 | 415.69      | 2      |
 | 3bQfR05g8dQAA | wUQ5GR06N4QtQAS | 2020-03 | 50          | 2      |
 | 3aQfR05g8dQAA | CrQ5GR0jd4QtQAI | 2020-03 | 250         | 2      |
-| 46QfR05g8dQAA | I4Q5GR14p4QtQAM | 2020-03 | 0           | 2      |
-| 45QfR05g8dQAA | I4Q5GR14p4QtQAM | 2020-03 | 0           | 2      |
 | 44QfR05g8dQAA | UkQ5GR14q4QtQAM | 2020-05 | 25          | 0      |
 | 43QfR05g8dQAA | xlQ5GR14q4QtQAA | 2020-03 | 250         | 2      |
 | 42QfR05g8dQAA | f6Q5GR1J04QtQAF | 2020-04 | 1500        | 1      |
@@ -13887,7 +13750,6 @@ There are no results to be displayed.
 | FsQfR05g8dQAI | HsQ5GR0bv4QtQAI | 2020-03 | 100         | 2      |
 | FrQfR05g8dQAI | Z3Q5GR1JQ4QtQAL | 2020-04 | 50          | 1      |
 | FnQfR05g8dQAI | nUQ5GR1EK4QtQAT | 2020-03 | 1112.14     | 2      |
-| FlQfR05g8dQAI | AYQ5GR19Z4QtQA4 | 2020-03 | 0           | 2      |
 | FkQfR05g8dQAI | IyQ5GR1254QtQAM | 2020-03 | 50          | 2      |
 | FhQfR05g8dQAI | g5Q5GR1Iz4QtQAB | 2020-04 | 162.5       | 1      |
 | FgQfR05g8dQAI | 60Q5GR1IH4QtQAD | 2020-03 | 2980.69     | 2      |
@@ -14224,7 +14086,6 @@ There are no results to be displayed.
 | yGQfR05g8dQAQ | a5Q5GR1Js4QtQAB | 2020-04 | 500         | 0      |
 | yAQfR05g8dQAQ | yhQ5GR0ka4QtQAA | 2020-02 | 100         | 2      |
 | y7QfR05g8dQAA | GCQ5GR1Bf4QtQA3 | 2020-02 | 45.43       | 1      |
-| y5QfR05g8dQAA | 1SQ5GR1Bf4QtQAR | 2020-02 | 0           | 1      |
 | y3QfR05g8dQAA | jKQ5GR0Pp4QtQAV | 2020-02 | 1254.54     | 2      |
 | y2QfR05g8dQAA | k0Q5GR0t34QtQAA | 2020-02 | 1442.97     | 2      |
 | y1QfR05g8dQAA | zXQ5GR0Tc4QtQAV | 2020-02 | 2345.45     | 2      |
@@ -14244,7 +14105,6 @@ There are no results to be displayed.
 | TqQfR05g8dQAI | wUQ5GR06N4QtQAS | 2020-03 | 50          | 1      |
 | TPQfR05g8dQAY | yIQ5GR1Bg4QtQAR | 2020-02 | 50          | 2      |
 | TOQfR05g8dQAY | yRQ5GR19b4QtQAQ | 2020-03 | 50          | 1      |
-| ToQfR05g8dQAI | 9aQ5GR1Ao4QtQAF | 2020-04 | 0.64        | 0      |
 | TNQfR05g8dQAY | tHQ5GR19Y4QtQAW | 2020-02 | 1100        | 2      |
 | TnQfR05g8dQAI | LGQ5GR1Ao4QtQA3 | 2020-03 | 190.13      | 1      |
 | TMQfR05g8dQAY | sfQ5GR0KC4QtQAH | 2020-02 | 1415.43     | 2      |
@@ -14289,7 +14149,6 @@ There are no results to be displayed.
 | TmQfR05g8dQAI | 8jQ5GR1El4QtQAB | 2020-03 | 250         | 1      |
 | TJQfR05g8dQAY | HsQ5GR0bv4QtQAI | 2020-03 | 100         | 1      |
 | TIQfR05g8dQAY | vzQ5GR06N4QtQAC | 2020-03 | 299         | 1      |
-| ThQfR05g8dQAI | AYQ5GR19Z4QtQA4 | 2020-03 | 0           | 1      |
 | TDQfR05g8dQAY | Z3Q5GR1JQ4QtQAL | 2020-04 | 50          | 0      |
 | TaQfR05g8dQAI | IyQ5GR1254QtQAM | 2020-03 | 50          | 1      |
 | T9QfR05g8dQAI | CPQ5GR1JR4QtQA5 | 2020-04 | 50          | 0      |
@@ -14455,7 +14314,6 @@ There are no results to be displayed.
 | z3QfR05g8dQAE | azQ5GR1HX4QtQAD | 2020-04 | 82.44       | 0      |
 | z2QfR05g8dQAE | xqQ5GR06N4QtQAC | 2020-03 | 1152.16     | 1      |
 | z0QfR05g8dQAE | cwQ5GR15j4QtQAE | 2020-03 | 250.05      | 1      |
-| yYQfR05g8dQAU | wzQ5GR1An4QtQAB | 2020-03 | 0           | 1      |
 | yyQfR05g8dQAE | 5GQ5GR0Kx4QtQAR | 2020-03 | 250.36      | 0      |
 | yXQfR05g8dQAU | ZYQ5GR17F4QtQA4 | 2020-03 | 50          | 1      |
 | ywQfR05g8dQAE | UeQ5GR0eB4QtQAK | 2020-03 | 662.91      | 0      |
@@ -14473,7 +14331,6 @@ There are no results to be displayed.
 | uYQfR05g8dQAU | REQ5GR1Am4QtQAZ | 2020-03 | 58.26       | 1      |
 | uTQfR05g8dQAU | 5cQ5GR1An4QtQAB | 2020-03 | 50          | 1      |
 | usQfR05g8dQAE | 2ZQ5GR13k4QtQAU | 2020-03 | 50          | 1      |
-| uqQfR05g8dQAE | iIQ5GR1EI4QtQAT | 2020-03 | 0           | 1      |
 | uoQfR05g8dQAE | A5Q5GR1An4QtQAJ | 2020-03 | 250         | 1      |
 | unQfR05g8dQAE | xBQ5GR06N4QtQAS | 2020-03 | 500         | 1      |
 | uJQfR05g8dQAU | FVQ5GR15j4QtQA2 | 2020-03 | 75          | 1      |
@@ -14574,7 +14431,6 @@ There are no results to be displayed.
 | nWQfR05L8dQAW | iPQ5GR0Uw4QtQAR | 2020-02 | 500         | 1      |
 | nVQfR05L8dQAW | HtQ5GR0mU4QtQAO | 2020-02 | 50          | 1      |
 | nUQfR05L8dQAW | 8wQ5GR0WE4QtQAD | 2020-02 | 100         | 1      |
-| nSQfR05L8dQAW | C9Q5GR0zQ4QtQAO | 2020-02 | 0           | 1      |
 | nkQfR05L8dQAG | ztQ5GR1Ha4QtQAF | 2020-03 | 250         | 0      |
 | o2QfR05L8dQAG | g8Q5GR1Bh4QtQAF | 2020-02 | 250         | 1      |
 | nzQfR05L8dQAG | DXQ5GR1Gz4QtQAZ | 2020-03 | 500         | 0      |
@@ -14614,7 +14470,6 @@ There are no results to be displayed.
 | WSQfR05L8dQA4 | zBQ5GR1Bh4QtQAV | 2020-02 | 893.1       | 1      |
 | WRQfR05L8dQA4 | wfQ5GR0k24QtQAA | 2020-02 | 250         | 1      |
 | WmQfR05L8dQAO | PrQ5GR07s4QtQAI | 2020-02 | 100         | 1      |
-| WkQfR05L8dQAO | QZQ5GR0t34QtQA2 | 2020-02 | 0           | 1      |
 | WhQfR05L8dQAO | k0Q5GR0t34QtQAA | 2020-02 | 1720.12     | 1      |
 | WfQfR05L8dQAO | 7AQ5GR0bx4QtQAU | 2020-02 | 500         | 1      |
 | WeQfR05L8dQAO | d4Q5GR0M74QtQAB | 2020-02 | 666.57      | 1      |
@@ -14724,7 +14579,6 @@ There are no results to be displayed.
 | rsQfR05L8dQAG | mmQ5GR0Ov4QtQAF | 2020-03 | 791.76      | 0      |
 | rrQfR05L8dQAG | YRQ5GR0zP4QtQA4 | 2020-03 | 250         | 0      |
 | rqQfR05L8dQAG | jfQ5GR0p34QtQAE | 2020-03 | 250         | 0      |
-| rpQfR05L8dQAG | jpQ5GR1GI4QtQAH | 2020-03 | 0           | 0      |
 | roQfR05L8dQAG | LhQ5GR0ff4QtQAM | 2020-03 | 250         | 0      |
 | rnQfR05L8dQAG | wxQ5GR06N4QtQAC | 2020-03 | 929.43      | 0      |
 | rmQfR05L8dQAG | wEQ5GR0OD4QtQAX | 2020-03 | 100         | 0      |
@@ -14841,7 +14695,6 @@ There are no results to be displayed.
 | ZCQfR05L8dQA0 | 4yQ5GR1An4QtQAB | 2020-03 | 50          | 0      |
 | Z8QfR05L8dQAK | wzQ5GR1An4QtQAB | 2020-03 | 50          | 0      |
 | YUQfR05L8dQA0 | nJQ5GR1An4QtQAR | 2020-03 | 50          | 0      |
-| YrQfR05L8dQAK | kTQ5GR0WF4QtQAT | 2020-03 | 0           | 0      |
 | YQQfR05L8dQA0 | d7Q5GR0BG4QtQAD | 2020-03 | 921.98      | 0      |
 | YnQfR05L8dQAK | 7yQ5GR1EJ4QtQAH | 2020-03 | 250         | 0      |
 | YeQfR05L8dQAK | kxQ5GR1EI4QtQAD | 2020-03 | 953.36      | 0      |
@@ -14849,7 +14702,6 @@ There are no results to be displayed.
 | ZIQfR05L8dQA0 | CrQ5GR1El4QtQAJ | 2020-03 | 200         | 0      |
 | ZAQfR05L8dQA0 | iIQ5GR1EI4QtQAT | 2020-03 | 25          | 0      |
 | Z9QfR05L8dQAK | O7Q5GR1EK4QtQAL | 2020-03 | 121.29      | 0      |
-| Z6QfR05L8dQAK | VuQ5GR1D84QtQAJ | 2020-03 | 0           | 0      |
 | Z2QfR05L8dQAK | xBQ5GR06N4QtQAS | 2020-03 | 500         | 0      |
 | Z1QfR05L8dQAK | FVQ5GR15j4QtQA2 | 2020-03 | 75          | 0      |
 | YxQfR05L8dQAK | A5Q5GR1An4QtQAJ | 2020-03 | 500         | 0      |
@@ -14864,7 +14716,6 @@ There are no results to be displayed.
 | ZGQfR05L8dQA0 | K5Q5GR1H04QtQAN | 2020-03 | 250         | 0      |
 | ZBQfR05L8dQA0 | tAQ5GR0mV4QtQAW | 2020-03 | 250         | 0      |
 | YZQfR05L8dQA0 | w0Q5GR0o64QtQAE | 2020-03 | 1915.89     | 0      |
-| YyQfR05L8dQAK | wmQ5GR06N4QtQAC | 2020-03 | 0           | 0      |
 | YsQfR05L8dQAK | IiQ5GR1H04QtQAN | 2020-03 | 250         | 0      |
 | YMQfR05L8dQA0 | 1NQ5GR1Bf4QtQAR | 2020-03 | 250         | 0      |
 | YjQfR05L8dQAK | xYQ5GR06N4QtQAS | 2020-03 | 99          | 0      |
@@ -14930,7 +14781,6 @@ There are no results to be displayed.
 | RkQfR05L8dQAK | 51Q5GR1Bg4QtQAB | 2020-02 | 1267.08     | 0      |
 | RjQfR05L8dQAK | HNQ5GR0M84QtQAZ | 2020-02 | 1169.39     | 0      |
 | RJQfR05L8dQA0 | otQ5GR0Tc4QtQAF | 2020-02 | 250         | 0      |
-| RhQfR05L8dQAK | M7Q5GR19b4QtQAI | 2020-02 | 0           | 0      |
 | RgQfR05L8dQAK | tEQ5GR0ks4QtQAQ | 2020-02 | 50          | 0      |
 | RfQfR05L8dQAK | cuQ5GR0o74QtQAA | 2020-02 | 781.61      | 0      |
 | S2QfR05L8dQAK | C9Q5GR0zQ4QtQAO | 2020-02 | 500         | 0      |
